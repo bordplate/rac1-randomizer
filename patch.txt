@@ -1,0 +1,38 @@
+#- name: Move Gold Bolts randomly
+#- author: bordplate
+#- href: https://github.com/MichaelRelaxen/racman
+#- version: 1.0
+#- description: Forces you to only have 1 health.
+
+automation: main.lua
+
+# Hook infobot update func
+0x4F8000: infobot.bin
+0x70e7b0: 0x4F8000
+
+
+# Prepare unlock_planet hook
+0x4f7700: 0xf821ff21
+0x4f7704: unlock_planet.bin
+# Apply unlock_planet hook
+0x112c20: 0x483e4ae0
+
+# Prepare planet_unlock_message hook
+0x4f7500: 0xf821ff21
+0x4f7504: unlock_planet_message.bin
+# Apply unlock_planet hook
+0x112af0: 0x483e4a10
+
+## Overwrite unlock_planet call in infobot update func so we call original unlock_planet function
+# Trampoline
+0x4f7600: 0xf821ff21
+0x4f7604: 0x4bc1b620
+# Apply redirect
+0x44cbc0: 0x480aaa41
+
+## Overwrite planet_unlock_message call in infobot update func so we call original planet_unlock_message function
+# Trampoline
+0x4F74E0: 0xf821ff21
+0x4F74E4: 0x4bc1b610
+# Apply redirect
+0x44ccc4: 0x480aa81d
