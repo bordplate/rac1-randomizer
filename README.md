@@ -6,7 +6,7 @@
 The randomizer is currently only supported on PS3 with digital PAL copy of Ratchet & Clank 1. There are no plans to support emulator or NTSC at this point. 
 
 ## EmoTracker item tracker
-Item tracker for EmoTracker is available, courtesy of Myth197 and DukeDragon28.
+Item tracker for EmoTracker is available, courtesy of Myth197 and DukeDragon28.  
 [github.com/Myth197/RAC-Rando-Tracker](https://github.com/Myth197/RAC-Rando-Tracker)
 
 ## Installation
