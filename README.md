@@ -16,3 +16,14 @@ When you have RacMAN working, attach it to the game, go to "Patches loader..." i
 
 ## Set seed
 To make a set seed, make a text file named `seed.txt` in RaCMAN's root folder (the upper folder where `racman.exe` is). The text file can contain any type of text. Newlines count as a character, meaning `oiejfoiwjef` and `oiejfoiwjef` with a new line at the end are different seeds. 
+
+## What does it do?
+- Infobots and items/gadgets are randomized.
+	- You always get infobots where you get infobots, and always items/gadgets where you get those. So there are two randomized pools. 
+	- Weapons are not randomized
+- Randomizer makes sure to generate solvable paths
+- Bolt denominations are increased to avoid excessive bolt grinding
+  - 1 bolt -> 5 bolts
+  - 5 bolt -> 21 bolts
+  - 20 bolt -> 60 bolts
+  - 50 bolt -> 200 bolts
