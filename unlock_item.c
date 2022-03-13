@@ -20,8 +20,9 @@
 void _start(int placeholder_item, int equipped) {
 	int item = (int)(item_replacements[placeholder_item]);
 	
-	// Ignore weapons, unless it's swingshot
-	if (placeholder_item != 12 && placeholder_item >= 10 && placeholder_item <= 25) {
+	// Ignore weapons IDs between 9 and 0x19 (weapons), except Swingshot and Hydrodisplacer
+	if (placeholder_item != 0xc && placeholder_item != 0x16 &&
+		placeholder_item >= 0x9 && placeholder_item <= 0x19) {
 		item = placeholder_item;
 	}
 	

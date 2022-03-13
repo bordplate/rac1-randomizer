@@ -36,7 +36,7 @@ infobots = {
 	{id=5, req_items={} },						-- Rilgar infobot on Blarg
 	{id=6, req_items={{2}, {3}} },  			-- Blarg infobot on Eudora
 	{id=7, req_items={{0xc}, {2}, {3}} },		-- Umbris infobot on Rilgar
-	{id=8, req_items={{0xc}, {2}, {3}} },		-- Batalia infobot on Umbris
+	{id=8, req_items={{0xc}, {2}} },			-- Batalia infobot on Umbris
 	{id=9, req_items={{0x1d}, {2}} },			-- Gaspar infobot on Batalia
 	{id=10, req_items={} },						-- Orxon infobot on Batalia
 	{id=0xb, req_items={} },					-- Pokitaru infobot on Orxon
@@ -46,7 +46,7 @@ infobots = {
 	{id=0xf, req_items={{0x1c}} },				-- Quartu infobot on Oltanis
 	{id=0x10, req_items={{2}, {3}, {0xc}} },	-- KaleboIII infobot on Quartu
 	{id=0x11, req_items={{3, 0xc}} },			-- Fleet infobot on Quartu
-	{id=0x12, req_items={{3}, {0x1c}, {3}} }	-- Veldin2 infobot on Fleet
+	{id=0x12, req_items={{3}, {0x1c, 0x1f}} }	-- Veldin2 infobot on Fleet
 }
 
 planets = {
@@ -125,6 +125,18 @@ function PlanetSpecificFix(planet, replaced_planet)
 	if planet == 1 then
 		Ratchetron:WriteMemory(GAME_PID, 0x4814dc + 3, 1, inttobytes(replaced_planet, 1))
 	end
+end
+
+function PlanetForItem(item_id)
+	for i, planet in pairs(planets) do
+		for j, item in ipairs(planet.items) do
+			if item == item_id then
+				return planet.id
+			end
+		end
+	end
+	
+	return -1
 end
 
 --- Deep copy of tables
@@ -256,7 +268,7 @@ function Randomize(seed)
 			return -1
 		end
 		
-		--  Didn't find an available out; count available item slots that we can fill		
+		--  Didn't find an available out; count available item slots that we can fill
 		for i, item_slot in pairs(available_item_slots) do
 			local requirement_combinations = table.deepcopy(item_slot.item.req_items)
 			
@@ -328,7 +340,9 @@ function Randomize(seed)
 		
 		
 		-- Try to fill available item slots to meet requirements for another out, starting with first available out
+		--file:write("# Filling available outs for " .. found_planet.name .. "\n")
 		for i, out in pairs(available_outs) do
+			--file:write("# Available out: " .. out .. "\n")
 			-- Try to fill the requirement in previous planets first
 			local requirement_combinations = table.deepcopy(out.infobot.req_items)
 			
@@ -416,6 +430,16 @@ function Randomize(seed)
 						
 						local item_slot_id = math.ceil(math.random() * #available_item_slots)
 						local item_slot = available_item_slots[item_slot_id]
+						
+						-- Try to prevent putting items on the planets they are required for, makes for more interesting generation. 
+						-- It's still possible, this just does a reroll.
+						if #available_item_slots > 1 and item_slot.planet == PlanetForItem(item_slot.item.id) then
+							file:write("# Trying to pick a different item slot\n")
+							item_slot_id = math.ceil(math.random() * #available_item_slots)
+							item_slot = available_item_slots[item_slot_id]
+						elseif item_slot.planet == PlanetForItem(item_slot.item.id) then
+							file:write("# Putting item on same planet as its requirement because only " .. #available_item_slots .. " were available.\n")
+						end
 						
 						if #available_item_slots <= 0 then
 							--print("No more available slots, shit's fucked.")
@@ -614,7 +638,7 @@ function OnLoad()
 	
 	local seed = os.time()
 	
-	local seed_file = io.open("rando.seed", "r")
+	local seed_file = io.open("seed.txt", "r")
 	if seed_file ~= nil then
 		seed = LibDeflate:Crc32(seed_file:read("*a"), 0)
 	

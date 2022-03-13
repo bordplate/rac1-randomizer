@@ -3,6 +3,7 @@
 #- href: https://github.com/bordplate/rac1-randomizer
 #- version: 1.0
 #- description: Randomizes what items and infobot coordinates you get
+#- update_url: https://bordplate.no/rac1/randomizer.json
 
 automation: main.lua
 
@@ -96,9 +97,14 @@ automation: main.lua
 0x04a2ebc: 0x484f7fdb
 0x04a3188: 0x60000000
 
-# Hydrodisplacer
-0x18394c: 0x38600016
-0x183950: 0x484f7fdb
+# Hydrodisplacer / Trespasser
+# Hook Hydro/Trespasser function
+0x4f6000: trespasser_hydrodisplacer.bin
+0x708320: 0x4f6000
+# NOP toast
+0x183b50: 0x60000000
+# NOP delete moby
+0x18395c: 0x60000000
 
 # Magneboots
 0x2ba1e0: 0x3860001c
@@ -129,6 +135,9 @@ automation: main.lua
 0x336394: 0x484f7fdb
 0x33641c: 0x38600023
 0x336420: 0x484f7fdb
+# Redirect to unlock_item function
+0x336678: 0x38600023
+0x33667c: 0x48112e1b
 
 # Zoomerator
 0x4b0a08: 0x38600030
@@ -160,6 +169,8 @@ automation: main.lua
 0x24a940: 0x60000000
 
 # Ultra nanotech
+0x24a96c: 0x38600035
+0x24a970: 0x484f7fdb
 # Redirect unlock_item function
 0x24a9d8: 0x60000000
 0x24a9f8: 0x38600035
