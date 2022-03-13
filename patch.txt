@@ -138,6 +138,8 @@ automation: main.lua
 # Redirect to unlock_item function
 0x336678: 0x38600023
 0x33667c: 0x48112e1b
+# NOP toast
+0x3366b0: 0x60000000
 
 # Zoomerator
 0x4b0a08: 0x38600030
