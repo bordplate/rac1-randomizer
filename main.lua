@@ -1,5 +1,6 @@
 require 'deepcopy'
 require 'io'
+require 'crc32'
 
 items = {
 	{id=2, name="Heli-pack", req_items={} },
@@ -21,8 +22,8 @@ items = {
 	{id=0x22, name="Bolt Grabber", req_items={{4, 6}} },
 	{id=0x23, name="Persuader", req_items={{0x1a, 0x31}} },
 	{id=0x30, name="Zoomerator", req_items={{0x1e, 0x2}, {0x1e, 0x3}} },
-	{id=0x31, name="Raritanium", req_items={{0xc}, {3}} },
-	{id=0x32, name="Codebot", req_items={{0xc}, {3}} },
+	{id=0x31, name="Raritanium", req_items={{0xc}, {3}, {2}} },
+	{id=0x32, name="Codebot", req_items={} },
 	{id=0x34, name="Premium Nanotech", req_items={{6, 2}, {6, 3}} },
 	{id=0x35, name="Ultra Nanotech", req_items={{6, 3, 0x34}, {6, 2, 0x34}} },
 }
@@ -33,7 +34,7 @@ infobots = {
 	{id=3, req_items={} },  					-- Kerwan infobot on Novalis 
 	{id=4, req_items={{2}, {3}} }, 				-- Eudora infobot on Kerwan
 	{id=5, req_items={} },						-- Rilgar infobot on Blarg
-	{id=6, req_items={{2}, {3}} },  					-- Blarg infobot on Eudora
+	{id=6, req_items={{2}, {3}} },  			-- Blarg infobot on Eudora
 	{id=7, req_items={{0xc}, {2}, {3}} },		-- Umbris infobot on Rilgar
 	{id=8, req_items={{0xc}, {2}, {3}} },		-- Batalia infobot on Umbris
 	{id=9, req_items={{0x1d}, {2}} },			-- Gaspar infobot on Batalia
@@ -207,6 +208,8 @@ function Randomize(seed)
 		local n_min_item_slots_needed = 0
 		local n_max_item_slots_needed = 0
 		
+		
+		::find_available_out::
 		-- Find next out we meet the requirements for
 		local out_index = #available_outs
 		for i=#available_outs, 1, -1 do
@@ -217,7 +220,7 @@ function Randomize(seed)
 			end
 			
 			-- Since there are different combinations of items that can be used to get an infobot, look through all of them
-			--print("Finding requirements for infobot: " .. available_outs[i].infobot.id)
+			file:write("# Finding requirements for infobot: " .. available_outs[i].infobot.id .. "\n")
 			for j, req_combination in ipairs(available_outs[i].infobot.req_items) do
 				if #req_combination > n_max_item_slots_needed then
 					n_max_item_slots_needed = #req_combination
@@ -239,7 +242,7 @@ function Randomize(seed)
 					
 					if found_items >= #req_combination then
 						out_index = i
-						--print("Requirements filled for " .. available_outs[i].infobot.id)
+						file:write("# Requirements filled for " .. available_outs[i].infobot.id .. "\n")
 						goto found_available_out  -- We met the requirements for at least 1 combination of items
 					end
 				end
@@ -247,7 +250,7 @@ function Randomize(seed)
 		end
 		
 		if n_min_item_slots_needed > 0 and #available_item_slots <= 0 then
-			print("Can't continue. No available item slots to place items.")
+			--print("Can't continue. No available item slots to place items.")
 			found_planet = nil
 			
 			return -1
@@ -274,7 +277,7 @@ function Randomize(seed)
 					passes2 = passes2 + 1
 					
 					if passes2 > 100 then
-						print("Shit's fucking fucked dude")
+						--print("Shit's fucking fucked dude")
 						return -1
 					end
 				
@@ -346,7 +349,7 @@ function Randomize(seed)
 					passes1 = passes1 + 1
 					
 					if passes1 > 100 then
-						print("Dude shit's fucked")
+						--print("Dude shit's fucked")
 						return -1
 					end
 					
@@ -394,7 +397,7 @@ function Randomize(seed)
 						passes = passes + 1
 						
 						if passes > 30 then
-							print("Dude shit's fucked")
+							--print("Dude shit's fucked")
 							return -1
 						end
 						
@@ -404,7 +407,7 @@ function Randomize(seed)
 								
 								--print("Met requirement " .. available_item .. ". Still need to meet:")
 								for iii, r in ipairs(requirements_left) do
-									print("\t" .. r)
+									--print("\t" .. r)
 								end
 								
 								goto continue_requirement_search
@@ -415,7 +418,7 @@ function Randomize(seed)
 						local item_slot = available_item_slots[item_slot_id]
 						
 						if #available_item_slots <= 0 then
-							print("No more available slots, shit's fucked.")
+							--print("No more available slots, shit's fucked.")
 							return  -1
 						end
 						
@@ -430,23 +433,27 @@ function Randomize(seed)
 									--print(item_slot.item.name .. " can not be replaced with " .. GetItemWithID(requirements_left[1]).name)
 									can_meet = false
 									n_requirements_met = 0
-								else
-									for jj, available_item in pairs(item_list) do
-										if requirement == available_item then
-											--print(item_slot.item.name .. " met a requirement for " .. GetItemWithID(requirements_left[1]).name .. ", even though it is a requirement in a different combination")
-											can_meet = false
-											--n_requirements_met = n_requirements_met + 1
-										end
+								end
+								
+								can_meet = false
+								for jj, available_item in pairs(item_list) do
+									if requirement == available_item then
+										--print(item_slot.item.name .. " met a requirement for " .. GetItemWithID(requirements_left[1]).name .. ", even though it is a requirement in a different combination")
+										can_meet = true
+										--file:write("# " .. GetItemWithID(requirements_left[1]).name .. " met requirement for " .. GetItemWithID(requirement).name .. "\n")
+										--n_requirements_met = n_requirements_met + 1
 									end
 								end
 								
-								if can_meet then
+								if can_meet or has_item then
+									file:write("# " .. GetItemWithID(requirements_left[1]).name .. " met requirement for " .. GetItemWithID(requirement).name .. "\n")
+								
 									n_requirements_met = n_requirements_met + 1
 								end
 							end
 							
 							if n_requirements_met >= #requirements then
-								--print("n_requirements_met: " .. n_requirements_met .. ", #requirements: " .. #requirements)
+								file:write("# " .. GetItemWithID(requirements_left[1]).name .. " n_requirements_met: " .. n_requirements_met .. ", #requirements: " .. #requirements .. "\n")
 								can_meet = true
 								goto continue_item_assignment
 							end
@@ -497,7 +504,7 @@ function Randomize(seed)
 							
 							file:write('"' .. planets[item_slot.planet].name .. '" -> "' .. GetItemWithID(requirements_left[1]).name .. '\"[color="#00ff00",label="' .. item_slot.item.name .. '",fontsize=8]\n')
 							
-							print(item_slot.item.name .. " -> " .. GetItemWithID(requirements_left[1]).name)
+							--print(item_slot.item.name .. " -> " .. GetItemWithID(requirements_left[1]).name)
 							item_list[item_slot.item.id] = requirements_left[1]
 							
 							RemoveItem(remaining_items, requirements_left[1])
@@ -507,6 +514,10 @@ function Randomize(seed)
 						end
 						
 						num_requirements_left = #requirements_left
+						
+						if (#requirements_left <= 0) then
+							goto find_available_out
+						end
 					end
 				end
 			end
@@ -531,7 +542,7 @@ function Randomize(seed)
 		--	print(i .. ": " .. out.planet .. " : " .. out.infobot.id)
 		--end
 		
-		print(available_outs[out_index].infobot.id .. " -> " .. found_planet.id)
+		--print(available_outs[out_index].infobot.id .. " -> " .. found_planet.id)
 		
 		if available_outs[out_index].planet == 0 then
 			file:write('"Veldin1" -> "' .. found_planet.name .. '"[label="Novalis",fontsize=8]\n')
@@ -560,17 +571,17 @@ function Randomize(seed)
 			finished = true
 		end
 		
-		print("-")
-		print("")
+		--print("-")
+		--print("")
 	end
 	
 	-- Fill remaining items in remaining available item slots
-	print("**** Filling remaining " .. #available_item_slots .. " item slots!")
+	--print("**** Filling remaining " .. #available_item_slots .. " item slots!")
 	shuffle(remaining_items)
 	for i, item_slot in ipairs(available_item_slots) do
 		file:write('"' .. planets[item_slot.planet].name .. '" -> "' .. remaining_items[1].name .. '\"[color="#0000ff",label="' .. item_slot.item.name .. '",fontsize=8]\n')
 		
-		print(item_slot.item.name .. " -> " .. remaining_items[1].name)
+		--print(item_slot.item.name .. " -> " .. remaining_items[1].name)
 		item_list[item_slot.item.id] = remaining_items[1].id
 	
 		table.remove(remaining_items, 1)
@@ -601,12 +612,22 @@ function OnLoad()
 	-- Clear any previous randomizer data
 	memset(0xb00000, 0, 0x200)
 	
+	local seed = os.time()
+	
+	local seed_file = io.open("rando.seed", "r")
+	if seed_file ~= nil then
+		seed = LibDeflate:Crc32(seed_file:read("*a"), 0)
+	
+		seed_file:close()
+	end
+	
 	-- Repeatedly generate new path until it works. Bad code makes generation hard
-	while Randomize(os.time()) <= 0 do
-		print("")
-		print("-----------------")
-		print("-----------------")  -- Just print a bunch of newlines so it's easy to distinguish attempts in the console
-		print("")
+	while Randomize(seed) <= 0 do
+		--print("")
+		--print("-----------------")
+		--print("-----------------")  -- Just print a bunch of newlines so it's easy to distinguish attempts in the console
+		--print("")
+		seed = seed + 1
 	end
 	
 	print("* Done!")
@@ -617,6 +638,5 @@ function OnTick(ticks)
 end
 
 function OnUnload()
-	--Ratchetron:WriteMemory(GAME_PID, 0x04a932c, 4, inttobytes(0x38600002, 4))
-	--Ratchetron:WriteMemory(GAME_PID, 0x4a933c, 4, inttobytes(0x38600bc7, 4))
+
 end
