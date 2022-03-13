@@ -2,6 +2,8 @@
 
 ## [Download](https://github.com/bordplate/rac1-randomizer/releases/tag/v1)
 
+## [Discord community](https://discord.gg/EuQKGes33C)
+
 ## Supported platforms
 The randomizer is currently only supported on PS3 with digital PAL copy of Ratchet & Clank 1. There are no plans to support emulator or NTSC at this point. 
 
