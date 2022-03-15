@@ -53,7 +53,7 @@ void _start(int placeholder_item, int equipped) {
 				message = 0x2ee7;
 				break;
 			case 0x32:
-				message = 0xbc7;
+				message = 0x426a;
 				break;
 			case 0x34:
 				message = 0x271c;
