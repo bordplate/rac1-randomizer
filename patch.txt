@@ -105,6 +105,8 @@ automation: main.lua
 0x183b50: 0x60000000
 # NOP delete moby
 0x18395c: 0x60000000
+# Skip "has item" check
+0x183954: 0x42800014
 
 # Magneboots
 0x2ba1e0: 0x3860001c
