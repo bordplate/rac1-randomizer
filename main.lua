@@ -3,67 +3,79 @@ require 'io'
 require 'crc32'
 
 items = {
-	{id=2, name="Heli-pack", req_items={} },
-	{id=3, name="Thruster-pack", req_items={} },
-	{id=4, name="Hydro-pack", req_items={{0x16}, {2}} },
-	{id=5, name="Sonic Summoner", req_items={{0x30}} },
-	{id=6, name="O2 Mask", req_items={{7}} },
-	{id=7, name="Pilot's Helmet", req_items={} },
+    {id=2, name="Heli-pack", req_items={} },
+    {id=3, name="Thruster-pack", req_items={} },
+    {id=4, name="Hydro-pack", req_items={{0x16}} },
+    {id=5, name="Sonic Summoner", req_items={{0x30}} },
+    {id=6, name="O2 Mask", req_items={{7}} },
+    {id=7, name="Pilot's Helmet", req_items={} },
+	{id=0xb, name="Devastator", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
 	{id=0xc, name="Swingshot", req_items={} },
-	{id=0x16, name="Hydrodisplacer", req_items={{0x1a}, {2}, {3}} },
-	{id=0x1a, name="Trespasser", req_items={{0xc}, {2}, {3}} },
-	{id=0x1b, name="MetalDetector", req_items={{0x1c}, {2}, {3}} },
-	{id=0x1c, name="Magneboots", req_items={} },
-	{id=0x1d, name="Grindboots", req_items={{0xc}, {2}, {3}} },
-	{id=0x1e, name="Hoverboard", req_items={} },
-	{id=0x1f, name="Hologuise", req_items={{0x1e}} },
-	{id=0x20, name="PDA", req_items={{0x1c}} },
-	{id=0x21, name="Map-O-Matic", req_items={{0x1d}} },
-	{id=0x22, name="Bolt Grabber", req_items={{4, 6}} },
-	{id=0x23, name="Persuader", req_items={{0x1a, 0x31}} },
-	{id=0x30, name="Zoomerator", req_items={{0x1e, 0x2}, {0x1e, 0x3}} },
-	{id=0x31, name="Raritanium", req_items={{0xc}, {3}, {2}} },
-	{id=0x32, name="Codebot", req_items={} },
-	{id=0x34, name="Premium Nanotech", req_items={{6, 2}, {6, 3}} },
-	{id=0x35, name="Ultra Nanotech", req_items={{6, 3, 0x34}, {6, 2, 0x34}} },
+	{id=0xd, name="Visibomb", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0xe, name="Taunter", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0xf, name="Blaster", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x10, name="Pyrocitor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x11, name="Mine Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x12, name="Walloper", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x13, name="Tesla Claw", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x14, name="Glove of Doom", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	--{id=0x15, name="Morph-O-Ray", req_items={}, ill_items={0x31, 0x32, 0x34, 0x35} },
+	{id=0x16, name="Hydrodisplacer", req_items={{0x1a}} },
+	{id=0x18, name="Drone Device", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x19, name="Decoy Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
+	{id=0x1a, name="Trespasser", req_items={{0xc}} },
+    {id=0x1b, name="MetalDetector", req_items={{0x1c}} },
+    {id=0x1c, name="Magneboots", req_items={} },
+    {id=0x1d, name="Grindboots", req_items={{0xc}} },
+    {id=0x1e, name="Hoverboard", req_items={} },
+    {id=0x1f, name="Hologuise", req_items={{0x1e,2,0xc,0x1d},{0x1e,3,0xc,0x1d}} },
+    {id=0x20, name="PDA", req_items={{0x1c}} },
+    {id=0x21, name="Map-O-Matic", req_items={{0x1d}} },
+    {id=0x22, name="Bolt Grabber", req_items={{4, 6}} },
+    {id=0x23, name="Persuader", req_items={{0x1a, 0x31, 0x16}} },
+    {id=0x30, name="Zoomerator", req_items={{0x1e,2},{0x1e,3}} },
+    {id=0x31, name="Raritanium", req_items={{0xc,2}, {0xc,3}} },
+    {id=0x32, name="Codebot", req_items={{4,6}} },
+    {id=0x34, name="Premium Nanotech", req_items={{6, 2}, {6, 3}} },
+    {id=0x35, name="Ultra Nanotech", req_items={{6, 3, 0x34}, {6, 2, 0x34} }},
 }
 
 infobots = {
-	{id=1, req_items={} },  					-- Novalis "infobot" on Veldin1
-	{id=2, req_items={} },  					-- Aridia infobot on Novalis
-	{id=3, req_items={} },  					-- Kerwan infobot on Novalis 
-	{id=4, req_items={{2}, {3}} }, 				-- Eudora infobot on Kerwan
-	{id=5, req_items={} },						-- Rilgar infobot on Blarg
-	{id=6, req_items={{2}, {3}} },  			-- Blarg infobot on Eudora
-	{id=7, req_items={{0xc}, {2}, {3}} },		-- Umbris infobot on Rilgar
-	{id=8, req_items={{0xc}, {2}} },			-- Batalia infobot on Umbris
-	{id=9, req_items={{0x1d}, {2}} },			-- Gaspar infobot on Batalia
-	{id=10, req_items={} },						-- Orxon infobot on Batalia
-	{id=0xb, req_items={} },					-- Pokitaru infobot on Orxon
-	{id=0xc, req_items={{6, 2}, {6, 3}} },		-- Hoven infobot on Orxon
-	{id=0xd, req_items={} },					-- Gemlik infobot on Hoven
-	{id=0xe, req_items={{0xc, 0x1c, 0x1a}, {3}} }, -- Oltanis infobot on Gemlik
-	{id=0xf, req_items={{0x1c}} },				-- Quartu infobot on Oltanis
-	{id=0x10, req_items={{2}, {3}, {0xc}} },	-- KaleboIII infobot on Quartu
-	{id=0x11, req_items={{3, 0xc}} },			-- Fleet infobot on Quartu
-	{id=0x12, req_items={{3}, {0x1c, 0x1f}} }	-- Veldin2 infobot on Fleet
+    {id=1, req_items={} },				-- Novalis "infobot" on Veldin1
+    {id=2, req_items={} },				-- Aridia infobot on Novalis
+    {id=3, req_items={} },				-- Kerwan infobot on Novalis 
+    {id=4, req_items={{2}, {3}} },			-- Eudora infobot on Kerwan
+    {id=5, req_items={} },				-- Rilgar infobot on Blarg
+    {id=6, req_items={{0x1a,0xc,2}, {0x1a, 0xc, 3}}},	-- Blarg infobot on Eudora
+    {id=7, req_items={{0xc,0x16}}},			-- Umbris infobot on Rilgar
+    {id=8, req_items={{0xc,0x16}}},			-- Batalia infobot on Umbris
+    {id=9, req_items={{0x1d}} },			-- Gaspar infobot on Batalia
+    {id=10, req_items={} },				-- Orxon infobot on Batalia
+    {id=0xb, req_items={} },				-- Pokitaru infobot on Orxon
+    {id=0xc, req_items={{6,0xc,0x1c, 3}} },		-- Hoven infobot on Orxon
+    {id=0xd, req_items={} },				-- Gemlik infobot on Hoven
+    {id=0xe, req_items={{0xc, 0x1c, 0x1a}} },		-- Oltanis infobot on Gemlik
+    {id=0xf, req_items={{0x1d}} }, 			-- Quartu infobot on Oltanis
+    {id=0x10, req_items={{0xc}} },    			-- KaleboIII infobot on Quartu
+    {id=0x11, req_items={{3, 0xc, 0x1f}} },		-- Fleet infobot on Quartu
+    {id=0x12, req_items={{0x1c,0x1f}} }			-- Veldin2 infobot on Fleet
 }
 
 planets = {
-	{id=1, name="Novalis", infobots={2,3}, items={}},
+	{id=1, name="Novalis", infobots={2,3}, items={0x10}},
 	{id=2, name="Aridia", infobots={},items={0x1e, 0x1a, 5}},
-	{id=3, name="Kerwan", infobots={4}, items={0xc, 2}},
-	{id=4, name="Eudora", infobots={6}, items={}},
-	{id=5, name="Rilgar", infobots={7}, items={0x30}},
-	{id=6, name="Blarg", infobots={5}, items={0x1d, 0x16}},
+	{id=3, name="Kerwan", infobots={4}, items={0xc, 2, 0xf}},
+	{id=4, name="Eudora", infobots={6}, items={0x14}},
+	{id=5, name="Rilgar", infobots={7}, items={0x30, 0x11}},
+	{id=6, name="Blarg", infobots={5}, items={0x1d, 0x16, 0xe}},
 	{id=7, name="Umbris", infobots={8}, items={}},
-	{id=8, name="Batalia", infobots={9, 10}, items={0x1b}},
-	{id=9, name="Gaspar", infobots={}, items={7}},
-	{id=10,name="Orxon",  infobots={0xb, 0xc}, items={0x34, 0x35, 0x1c}},
-	{id=11,name="Pokitaru",  infobots={}, items={3, 6, 0x23}},
-	{id=12,name="Hoven",  infobots={0xd}, items={0x31, 4}},
+	{id=8, name="Batalia", infobots={9, 10}, items={0x1b, 0xb}},
+	{id=9, name="Gaspar", infobots={}, items={7, 0x12}},
+	{id=10,name="Orxon",  infobots={0xb, 0xc}, items={0x34, 0x35, 0x1c, 0xd}},
+	{id=11,name="Pokitaru",  infobots={}, items={3, 6, 0x23, 0x19}},
+	{id=12,name="Hoven",  infobots={0xd}, items={0x31, 4, 0x18}},
 	{id=13,name="Gemlik",  infobots={0xe}, items={}},
-	{id=14,name="Oltanis",  infobots={0xf}, items={0x20}},
+	{id=14,name="Oltanis",  infobots={0xf}, items={0x20, 0x13}},
 	{id=15,name="Quartu",  infobots={0x10, 0x11}, items={0x22}},
 	{id=16,name="KaleboIII",  infobots={}, items={0x1f, 0x21}},
 	{id=17,name="Fleet",  infobots={0x12}, items={0x32}}
@@ -127,6 +139,20 @@ function PlanetSpecificFix(planet, replaced_planet)
 	end
 end
 
+function ReplaceItem(item, replaced_item)
+	-- Vendor items
+	if (item ~= 0xc and item ~= 0x16 and item ~= 0x15 and item >= 0xb and item <= 0x19) then
+		for index, planet in ipairs(planets) do
+			if InArray(planet.items, item) then
+				Ratchetron:WriteMemory(GAME_PID, 0x737bf0 + (planet.id * 4), 4, inttobytes(replaced_item, 4))
+				Ratchetron:WriteMemory(GAME_PID, 0xB00150 + replaced_item, 1, inttobytes(1, 1))
+			end
+		end
+	end
+
+	Ratchetron:WriteMemory(GAME_PID, 0xB00100 + item, 1, inttobytes(replaced_item, 1))
+end
+
 function PlanetForItem(item_id)
 	for i, planet in pairs(planets) do
 		for j, item in ipairs(planet.items) do
@@ -172,6 +198,16 @@ function RemoveItem(tbl, id)
 	print("Couldn't find item: " .. id)
 	
 	return -1
+end
+
+function InArray (tab, val)
+    for index, value in ipairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
 end
 
 function Randomize(seed)
@@ -410,7 +446,7 @@ function Randomize(seed)
 					while num_requirements_left > 0 do
 						passes = passes + 1
 						
-						if passes > 30 then
+						if passes > 60 then
 							--print("Dude shit's fucked")
 							return -1
 						end
@@ -431,6 +467,15 @@ function Randomize(seed)
 						local item_slot_id = math.ceil(math.random() * #available_item_slots)
 						local item_slot = available_item_slots[item_slot_id]
 						
+						-- Check if this item slot has any illegal item replacements
+						if item_slot.item.ill_items ~= nil then
+							for index, value in ipairs(item_slot.item.ill_items) do
+								if value == requirements_left[1] then
+									goto continue_requirement_search
+								end
+							end
+						end
+						
 						-- Try to prevent putting items on the planets they are required for, makes for more interesting generation. 
 						-- It's still possible, this just does a reroll.
 						if #available_item_slots > 1 and item_slot.planet == PlanetForItem(item_slot.item.id) then
@@ -450,6 +495,7 @@ function Randomize(seed)
 						
 						-- Check that this item isn't a requirement for the available slot unless we already meet other requirements
 						can_meet = true
+						
 						for ii, reqs in pairs(item_slot.item.req_items) do
 							n_requirements_met = 0
 							for kk, requirement in pairs(reqs) do
@@ -515,14 +561,14 @@ function Randomize(seed)
 									-- Find out if the current item requirement is in the list of items we've already placed
 									local has_item = false
 									for l, available_item in ipairs(item_list) do
-									if item.id == available_item then
-										has_item = true
+										if item.id == available_item then
+											has_item = true
+										end
 									end
-								end
 								  
-								  if not has_item then
-									requirements_left[#requirements_left + 1] = item
-								  end
+									if not has_item then
+										requirements_left[#requirements_left + 1] = item
+									end
 								end
 							end
 							
@@ -602,10 +648,27 @@ function Randomize(seed)
 	-- Fill remaining items in remaining available item slots
 	--print("**** Filling remaining " .. #available_item_slots .. " item slots!")
 	shuffle(remaining_items)
+	local passes3 = 0
 	for i, item_slot in ipairs(available_item_slots) do
+		::fuck::
+	
+		-- Deadlock prevention, idk if it's strictly necessary. Shit code is shit
+		passes3 = passes3 + 1
+		if passes3 > 200 then
+			return -1
+		end
+	
+		if item_slot.item.ill_items ~= nil then
+			if InArray(item_slot.item.ill_items, remaining_items[1].id) then
+				shuffle(remaining_items)
+				goto fuck
+			end
+		end
+	
 		file:write('"' .. planets[item_slot.planet].name .. '" -> "' .. remaining_items[1].name .. '\"[color="#0000ff",label="' .. item_slot.item.name .. '",fontsize=8]\n')
-		
 		--print(item_slot.item.name .. " -> " .. remaining_items[1].name)
+		
+		
 		item_list[item_slot.item.id] = remaining_items[1].id
 	
 		table.remove(remaining_items, 1)
@@ -626,7 +689,7 @@ function Randomize(seed)
 	end
 	
 	for id, replacement in pairs(item_list) do
-		Ratchetron:WriteMemory(GAME_PID, 0xB00100 + id, 1, inttobytes(replacement, 1))
+		ReplaceItem(id, replacement)
 	end
 	
 	return 1
@@ -634,7 +697,7 @@ end
 
 function OnLoad()
 	-- Clear any previous randomizer data
-	memset(0xb00000, 0, 0x200)
+	memset(0xb00000, 0, 0x300)
 	
 	local seed = os.time()
 	
