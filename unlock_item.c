@@ -11,8 +11,10 @@
 #define toast_message ((void (*)(unsigned int, int))0x112a38)
 
 #define max_health (*((int*)0x71fb28))
+#define game_state (*((int*)0x00A10708))
 
 #define blarg_bridge_extended (*((char*)0x0a0cae5))
+#define has_premium_nanotech (*((char*)0x0096bff4))
 
 // Special items:
 // 	48: Zoomerator
@@ -25,18 +27,11 @@
 void _start(int placeholder_item, int equipped) {
 	int item = (int)(item_replacements[placeholder_item]);
 	
-	if (vendor_items[placeholder_item] == 1 || item == 0) {
+	// If game state is in vendor
+	if ((vendor_items[placeholder_item] == 1 && game_state == 5) || item == 0) {
 		item = placeholder_item;
 	}
-	
-	
-	
-	// Ignore weapons IDs between 9 and 0x19 (weapons), except Swingshot and Hydrodisplacer
-	//if (placeholder_item != 0xc && placeholder_item != 0x16 &&
-	//	placeholder_item >= 0x9 && placeholder_item <= 0x19) {
-	//	item = placeholder_item;
-	//}
-	
+
 	items_map[placeholder_item] = 1;
 	
 	// Fix some stuff that unlocking O2 mask makes impossible to get casually
@@ -52,12 +47,12 @@ void _start(int placeholder_item, int equipped) {
 		special_items[item-48] = 1;
 		
 		if (item == 0x34 && max_health < 5) {
-			max_health = 5;
+			max_health += 1;
 			player_health = max_health;
 		}
 		
 		if (item == 0x35) {
-			max_health = 8;
+			max_health += 3;
 			player_health = max_health;
 		}
 		
