@@ -22,12 +22,13 @@ You can enable the mod at any time and then start a new game, or start a new gam
 To fully disable the randomizer you need to quit the game and start it up again. The mod doesn't fully clean up after itself when it's being unloaded yet. 
 
 ## Set seed
-To make a set seed, make a text file named `seed.txt` in RaCMAN's root folder (the upper folder where `racman.exe` is). The text file can contain any type of text. Newlines count as a character, meaning `oiejfoiwjef` and `oiejfoiwjef` with a new line at the end are different seeds. 
+To make a set seed, make a text file named `seed.txt` in RaCMAN's root folder (the upper folder where `racman.exe` is). The text file can contain any type of text. Newlines count as a character, meaning `oiejfoiwjef` and `oiejfoiwjef` with a new line at the end are different seeds.  
+
+Add `# graph: false` to the top of the `seed.txt` file to disable debug graph generation. By design, this changes the seed so a seed file with and without `# graph: false` are different, regardless of wether anything else in the file is the same. 
 
 ## What does it do?
-- Infobots and items/gadgets are randomized.
-	- You always get infobots where you get infobots, and always items/gadgets where you get those. So there are two randomized pools. 
-	- Weapons are not randomized
+- Infobots and weapons/items/gadgets are randomized.
+	- You always get infobots where you get infobots, and always weapons/items/gadgets where you get those. So there are two randomized pools. 
 - Randomizer makes sure to generate solvable paths
 - Bolt denominations are increased to avoid excessive bolt grinding
   - 1 bolt -> 5 bolts
