@@ -12,6 +12,8 @@
 
 #define max_health (*((int*)0x71fb28))
 
+#define blarg_bridge_extended (*((char*)0x0a0cae5))
+
 // Special items:
 // 	48: Zoomerator
 // 	49: Raritanium
@@ -37,6 +39,11 @@ void _start(int placeholder_item, int equipped) {
 	
 	items_map[placeholder_item] = 1;
 	
+	// Fix some stuff that unlocking O2 mask makes impossible to get casually
+	if (item == 6) {
+		blarg_bridge_extended = -1;  // Extend bridge on Blarg so it's easy to get Hydrodisplacer as Ratchet
+	}
+	
 	if (item <= 36) {
 		unlock_item_trampoline(item, 1);
 	}
@@ -46,10 +53,12 @@ void _start(int placeholder_item, int equipped) {
 		
 		if (item == 0x34 && max_health < 5) {
 			max_health = 5;
+			player_health = max_health;
 		}
 		
 		if (item == 0x35) {
 			max_health = 8;
+			player_health = max_health;
 		}
 		
 		unsigned int message = 0;
