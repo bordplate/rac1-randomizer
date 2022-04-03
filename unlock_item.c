@@ -2,12 +2,17 @@
 
 #define items_map ((char*)0xB00050)
 #define item_replacements ((char*)0xB00100)
+#define vendor_items ((char*)0xB00150)
 
 #define special_items ((char*)0x96bff0)
 
 #define unlock_item_trampoline ((void (*)(int, int))0x4f8ff8)
 
 #define toast_message ((void (*)(unsigned int, int))0x112a38)
+
+#define max_health (*((int*)0x71fb28))
+
+#define blarg_bridge_extended (*((char*)0x0a0cae5))
 
 // Special items:
 // 	48: Zoomerator
@@ -20,13 +25,24 @@
 void _start(int placeholder_item, int equipped) {
 	int item = (int)(item_replacements[placeholder_item]);
 	
-	// Ignore weapons IDs between 9 and 0x19 (weapons), except Swingshot and Hydrodisplacer
-	if (placeholder_item != 0xc && placeholder_item != 0x16 &&
-		placeholder_item >= 0x9 && placeholder_item <= 0x19) {
+	if (vendor_items[placeholder_item] == 1 || item == 0) {
 		item = placeholder_item;
 	}
 	
+	
+	
+	// Ignore weapons IDs between 9 and 0x19 (weapons), except Swingshot and Hydrodisplacer
+	//if (placeholder_item != 0xc && placeholder_item != 0x16 &&
+	//	placeholder_item >= 0x9 && placeholder_item <= 0x19) {
+	//	item = placeholder_item;
+	//}
+	
 	items_map[placeholder_item] = 1;
+	
+	// Fix some stuff that unlocking O2 mask makes impossible to get casually
+	if (item == 6) {
+		blarg_bridge_extended = -1;  // Extend bridge on Blarg so it's easy to get Hydrodisplacer as Ratchet
+	}
 	
 	if (item <= 36) {
 		unlock_item_trampoline(item, 1);
@@ -37,10 +53,12 @@ void _start(int placeholder_item, int equipped) {
 		
 		if (item == 0x34 && max_health < 5) {
 			max_health = 5;
+			player_health = max_health;
 		}
 		
 		if (item == 0x35) {
 			max_health = 8;
+			player_health = max_health;
 		}
 		
 		unsigned int message = 0;

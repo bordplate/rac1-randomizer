@@ -10,6 +10,7 @@ c() {
 }
 
 s has_item	
+s tramp_vendor_cmp
 s has_thruster_heli_pack
 
 c infobot 4F8000
@@ -17,3 +18,8 @@ c unlock_planet 4f7704
 c unlock_planet_message 4f7504
 c unlock_item 4f9000
 c trespasser_hydrodisplacer 4f6000
+c metal_detector_spot 4f60c8
+c vendor_class 4f8d38
+c swap_weapon 4f8100
+c nanotech_vendor 4f8200
+c orxon_gates 4f7000
