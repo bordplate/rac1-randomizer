@@ -23,3 +23,4 @@ c vendor_class 4f8d38
 c swap_weapon 4f8100
 c nanotech_vendor 4f8200
 c orxon_gates 4f7000
+c clear_vendor_data 4f6200

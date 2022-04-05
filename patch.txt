@@ -1,7 +1,7 @@
 #- name: Randomizer
 #- author: bordplate
 #- href: https://github.com/bordplate/rac1-randomizer
-#- version: 1.1.1
+#- version: 1.1.2
 #- description: Randomizes what items and infobot coordinates you get
 #- update_url: https://bordplate.no/rac1/randomizer.json
 
@@ -233,6 +233,11 @@
 
 # Disable animations after purchase because it too often crashes the game
 0x0016dd90: 0x60000000
+
+# Fix crash that occurs if there's junk data where the vendor stores moby data
+# The crash only occurred if the first item in the vendor was unsupported items/gadgets like helmets and boots
+0x4f6200: clear_vendor_data.bin
+0x16ac30: 0x484f6203
 
 # Open all locked Orxon gates if player has O2 Mask
 0x4f7000: orxon_gates.bin

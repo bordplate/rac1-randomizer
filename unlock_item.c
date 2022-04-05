@@ -30,9 +30,9 @@ void _start(int placeholder_item, int equipped) {
 	// If game state is in vendor
 	if ((vendor_items[placeholder_item] == 1 && game_state == 5) || item == 0) {
 		item = placeholder_item;
+	} else {
+		items_map[placeholder_item] = 1;
 	}
-
-	items_map[placeholder_item] = 1;
 	
 	// Fix some stuff that unlocking O2 mask makes impossible to get casually
 	if (item == 6) {
