@@ -3,64 +3,64 @@ require 'io'
 require 'crc32'
 
 items = {
-    {id=2, name="Heli-pack", req_items={} },
-    {id=3, name="Thruster-pack", req_items={} },
-    {id=4, name="Hydro-pack", req_items={{0x16}} },
-    {id=5, name="Sonic Summoner", req_items={{0x30}} },
-    {id=6, name="O2 Mask", req_items={{7}} },
-    {id=7, name="Pilot's Helmet", req_items={} },
-	{id=0x9, name="Suck Cannon", req_items={{0x2}, {0x3}} },
-	{id=0xb, name="Devastator", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0xc, name="Swingshot", req_items={} },
-	{id=0xd, name="Visibomb", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0xe, name="Taunter", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0xf, name="Blaster", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x10, name="Pyrocitor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x11, name="Mine Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x12, name="Walloper", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x13, name="Tesla Claw", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x14, name="Glove of Doom", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x15, name="Morph-O-Ray", req_items={{0xc}} },
-	{id=0x16, name="Hydrodisplacer", req_items={{0x1a}} },
-	{id=0x17, name="R.Y.N.O.", req_items={{0x1b, 0x2}, {0x1b, 0x3}} },
-	{id=0x18, name="Drone Device", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x19, name="Decoy Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x1a, name="Trespasser", req_items={{0xc}} },
-    {id=0x1b, name="MetalDetector", req_items={{0x1c}} },
-    {id=0x1c, name="Magneboots", req_items={} },
-    {id=0x1d, name="Grindboots", req_items={{0xc}} },
-    {id=0x1e, name="Hoverboard", req_items={} },
-    {id=0x1f, name="Hologuise", req_items={{0x1e,2,0xc,0x1d},{0x1e,3,0xc,0x1d}} },
-    {id=0x20, name="PDA", req_items={{0x1c}} },
-    {id=0x21, name="Map-O-Matic", req_items={{0x1d}} },
-    {id=0x22, name="Bolt Grabber", req_items={{4, 6}} },
-    {id=0x23, name="Persuader", req_items={{0x1a, 0x31, 0x16}} },
-    {id=0x30, name="Zoomerator", req_items={{0x1e,2},{0x1e,3}} },
-    {id=0x31, name="Raritanium", req_items={{0xc,2}, {0xc,3}} },
-    {id=0x32, name="Codebot", req_items={{4,6}} },
-    {id=0x34, name="Premium Nanotech", req_items={{6, 2}, {6, 3}} },
-    {id=0x35, name="Ultra Nanotech", req_items={{6, 3, 0x34, 0x1b}, {6, 2, 0x34, 0x1b} }},
+    {id=2, name="Kerwan, Al's Shop", req_items={} }, 													-- Heli-pack
+    {id=3, name="Poki, Bob's Shop", req_items={} },														-- Thruster-pack
+    {id=4, name="Hoven, Edwina's Shop", req_items={{0x16}} },											-- Hydro-pack
+    {id=5, name="Aridia, Skidd's Agent", req_items={{0x30}} },											-- Sonic Summoner
+    {id=6, name="Poki, Ship Fight", req_items={{7}} },													-- O2 Mask
+    {id=7, name="Gaspar, Pilot's Helmet", req_items={} },												-- Pilot's Helmet
+	{id=0x9, name="Eudora, Suck Cannon", req_items={{0x2}, {0x3}} },									-- Suck Cannon
+	{id=0xb, name="Batalia, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Devastator
+	{id=0xc, name="Kerwan, Fitness Course", req_items={} },												-- Swingshot
+	{id=0xd, name="Orxon, Vendor", req_items={6}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Visibomb
+	{id=0xe, name="Blarg, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Taunter
+	{id=0xf, name="Kerwan, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Blaster
+	{id=0x10, name="Novalis, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Pyrocitor	
+	{id=0x11, name="Rilgar, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Mine Glove
+	{id=0x12, name="Gaspar, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Walloper
+	{id=0x13, name="Oltanis, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Tesla Claw
+	{id=0x14, name="Eudora, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Glove of Doom
+	{id=0x15, name="Oltanis, Morph-O-Ray", req_items={{0xc}} },											-- Morph-O-Ray
+	{id=0x16, name="Blarg, Outside", req_items={{0x1a}} },												-- Hydrodisplacer
+	{id=0x17, name="Rilgar, Shady Salesman", req_items={{0x1b, 0x2}, {0x1b, 0x3}} },					-- R.Y.N.O.
+	{id=0x18, name="Hoven, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Drone Device
+	{id=0x19, name="Poki, Vendor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			-- Decoy Glove
+	{id=0x1a, name="Aridia, Construction Zone", req_items={{0xc}} },									-- Trespasser
+    {id=0x1b, name="Batalia, Turret Fight", req_items={{0x1c}} },										-- Metaldetector
+    {id=0x1c, name="Orxon, Clank 1", req_items={} },													-- Magneboots
+    {id=0x1d, name="Blarg, Alien Queen", req_items={{0xc}} },											-- Grindboots
+    {id=0x1e, name="Aridia, Save Skidd", req_items={} },												-- Hoverboard
+    {id=0x1f, name="Kalebo III, Hoverboard Race", req_items={{0x1e,2,0xc,0x1d},{0x1e,3,0xc,0x1d}} },	-- Hologuise
+    {id=0x20, name="Oltanis, Steve", req_items={{0x1c}} },												-- PDA
+    {id=0x21, name="Kalebo III, Grind Rail", req_items={{0x1d}} },										-- Map-O-Matic
+    {id=0x22, name="Quartu, Water path", req_items={{4, 6}} },											-- Bolt Grabber
+    {id=0x23, name="Poki, Water Lab", req_items={{0x1a, 0x31, 0x16}} },									-- Persuader
+    {id=0x30, name="Rilgar, Hoverboard Race", req_items={{0x1e,2},{0x1e,3}} },							-- Zoomerator
+    {id=0x31, name="Hoven, Drill Guy", req_items={{0xc,2}, {0xc,3}} },									-- Raritanium
+    {id=0x32, name="Drek's Fleet, Water path", req_items={{4,6}} },										-- Codebot
+    {id=0x34, name="Orxon, Nanotech Vendor 1", req_items={{6, 2}, {6, 3}} },							-- Premium Nanotech
+    {id=0x35, name="Orxon, Nanotech Vendor 2", req_items={{6, 3, 0x34, 0x1b}, {6, 2, 0x34, 0x1b} }},	-- Ultra Nanotech
 }
 
 infobots = {
-    {id=1, req_items={} },				-- Novalis "infobot" on Veldin1
-    {id=2, req_items={} },				-- Aridia infobot on Novalis
-    {id=3, req_items={} },				-- Kerwan infobot on Novalis 
-    {id=4, req_items={{2}, {3}} },			-- Eudora infobot on Kerwan
-    {id=5, req_items={} },				-- Rilgar infobot on Blarg
-    {id=6, req_items={{0x1a,0xc,2}, {0x1a, 0xc, 3}}},	-- Blarg infobot on Eudora
-    {id=7, req_items={{0xc,0x16}}},			-- Umbris infobot on Rilgar
-    {id=8, req_items={{0xc,0x16}}},			-- Batalia infobot on Umbris
-    {id=9, req_items={{0x1d}} },			-- Gaspar infobot on Batalia
-    {id=10, req_items={} },				-- Orxon infobot on Batalia
-    {id=0xb, req_items={} },				-- Pokitaru infobot on Orxon
-    {id=0xc, req_items={{6,0xc,0x1c, 3}} },		-- Hoven infobot on Orxon
-    {id=0xd, req_items={} },				-- Gemlik infobot on Hoven
-    {id=0xe, req_items={{0xc, 0x1c, 0x1a}} },		-- Oltanis infobot on Gemlik
-    {id=0xf, req_items={{0x1d}} }, 			-- Quartu infobot on Oltanis
-    {id=0x10, req_items={{0xc}} },    			-- KaleboIII infobot on Quartu
-    {id=0x11, req_items={{3, 0xc, 0x1f}} },		-- Fleet infobot on Quartu
-    {id=0x12, req_items={{0x1c,0x1f}} }			-- Veldin2 infobot on Fleet
+    {id=1, name="Veldin 1, Clank", req_items={} },										-- Novalis "infobot" on Veldin1
+    {id=2, name="Novalis, Water works", req_items={} },									-- Aridia infobot on Novalis
+    {id=3, name="Novalis, Save the Chairman", req_items={} },							-- Kerwan infobot on Novalis 
+    {id=4, name="Kerwan, Train", req_items={{2}, {3}} },								-- Eudora infobot on Kerwan
+    {id=5, name="Blarg, Warship", req_items={} },										-- Rilgar infobot on Blarg
+    {id=6, name="Eudora, Robot Lieutenant", req_items={{0x1a,0xc,2}, {0x1a, 0xc, 3}}},	-- Blarg infobot on Eudora
+    {id=7, name="Rilgar, Qwark's Trailer", req_items={{0xc,0x16,2},{0xc,0x16,3}}},		-- Umbris infobot on Rilgar
+    {id=8, name="Umbris, Snagglebeast", req_items={{0xc,0x16}}},						-- Batalia infobot on Umbris
+    {id=9, name="Batalia, Grind Rail", req_items={{0x1d}} },							-- Gaspar infobot on Batalia
+    {id=10, name="Batalia, Commando", req_items={} },									-- Orxon infobot on Batalia
+    {id=0xb, name="Orxon, Clank 2", req_items={} },										-- Pokitaru infobot on Orxon
+    {id=0xc, name="Orxon, Chase the infobot", req_items={{6,0xc,0x1c, 3}} },			-- Hoven infobot on Orxon
+    {id=0xd, name="Hoven, Turret Fight", req_items={} },								-- Gemlik infobot on Hoven
+    {id=0xe, name="Gemlik, Defeat Qwark", req_items={{0xc, 0x1c, 0x1a}} },				-- Oltanis infobot on Gemlik
+    {id=0xf, name="Oltanis, Deaf guy", req_items={{0x1d}} }, 							-- Quartu infobot on Oltanis
+    {id=0x10, name="Quartu, Giant Clank Fight", req_items={{0xc}} },    				-- KaleboIII infobot on Quartu
+    {id=0x11, name="Quartu, Clank's Mum", req_items={{3, 0xc, 0x1f}} },					-- Fleet infobot on Quartu
+    {id=0x12, name="Drek's Fleet, Battle through the ships", req_items={{0x1c,0x1f}} }	-- Veldin2 infobot on Fleet
 }
 
 planets = {
