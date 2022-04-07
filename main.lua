@@ -3,90 +3,90 @@ require 'io'
 require 'crc32'
 
 items = {
-    {id=2, name="Heli-pack", req_items={} },
-    {id=3, name="Thruster-pack", req_items={} },
-    {id=4, name="Hydro-pack", req_items={{0x16}} },
-    {id=5, name="Sonic Summoner", req_items={{0x30}} },
-    {id=6, name="O2 Mask", req_items={{7}} },
-    {id=7, name="Pilot's Helmet", req_items={} },
-	{id=0x9, name="Suck Cannon", req_items={{0x2}, {0x3}} },
-	{id=0xb, name="Devastator", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0xc, name="Swingshot", req_items={} },
-	{id=0xd, name="Visibomb", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0xe, name="Taunter", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0xf, name="Blaster", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x10, name="Pyrocitor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x11, name="Mine Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x12, name="Walloper", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x13, name="Tesla Claw", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x14, name="Glove of Doom", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x15, name="Morph-O-Ray", req_items={{0xc}} },
-	{id=0x16, name="Hydrodisplacer", req_items={{0x1a}} },
-	{id=0x17, name="R.Y.N.O.", req_items={{0x1b, 0x2}, {0x1b, 0x3}} },
-	{id=0x18, name="Drone Device", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x19, name="Decoy Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },
-	{id=0x1a, name="Trespasser", req_items={{0xc}} },
-    {id=0x1b, name="MetalDetector", req_items={{0x1c}} },
-    {id=0x1c, name="Magneboots", req_items={} },
-    {id=0x1d, name="Grindboots", req_items={{0xc}} },
-    {id=0x1e, name="Hoverboard", req_items={} },
-    {id=0x1f, name="Hologuise", req_items={{0x1e,2,0xc,0x1d},{0x1e,3,0xc,0x1d}} },
-    {id=0x20, name="PDA", req_items={{0x1c}} },
-    {id=0x21, name="Map-O-Matic", req_items={{0x1d}} },
-    {id=0x22, name="Bolt Grabber", req_items={{4, 6}} },
-    {id=0x23, name="Persuader", req_items={{0x1a, 0x31, 0x16}} },
-    {id=0x30, name="Zoomerator", req_items={{0x1e,2},{0x1e,3}} },
-    {id=0x31, name="Raritanium", req_items={{0xc,2}, {0xc,3}} },
-    {id=0x32, name="Codebot", req_items={{4,6}} },
-    {id=0x34, name="Premium Nanotech", req_items={{6, 2}, {6, 3}} },
-    {id=0x35, name="Ultra Nanotech", req_items={{6, 3, 0x34, 0x1b}, {6, 2, 0x34, 0x1b} }},
+    {id=2, location="Al's Shop", host_item="Heli-pack", req_items={} },													--Kerwan
+    {id=3, location="Bob's Shop", host_item="Thruster-pack",  req_items={} },											--Poki
+    {id=4, location="Edwina's Shop", host_item="Hydro-pack", req_items={{0x16}} },										--Hoven
+    {id=5, location="Skidd's Agent", host_item="Sonic Summoner", req_items={{0x30}} },									--Aridia
+    {id=6, location="Ship Fight", host_item="O2 Mask", req_items={{7}} },												--Poki
+    {id=7, location="Pilot's Helmet", host_item="Pilot's Helmet", req_items={} },										--Gaspar
+	{id=0x9, location="Suck Cannon", host_item="Suck Cannon", req_items={{0x2}, {0x3}} },								--Eudora
+	{id=0xb, location="Vendor", host_item="Devastator", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Batalia
+	{id=0xc, location="Fitness Course", host_item="Swingshot", req_items={} },											--Kerwan
+	{id=0xd, location="Vendor", host_item="Visibomb", req_items={{6}}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Orxon
+	{id=0xe, location="Vendor", host_item="Taunter", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			--Blarg
+	{id=0xf, location="Vendor", host_item="Blaster", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },			--Kerwan
+	{id=0x10, location="Vendor", host_item="Pyrocitor", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Novalis	
+	{id=0x11, location="Vendor", host_item="Mine Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Rilgar
+	{id=0x12, location="Vendor", host_item="Walloper", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Gaspar
+	{id=0x13, location="Vendor", host_item="Tesla Claw", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Oltanis
+	{id=0x14, location="Vendor", host_item="Glove of Doom", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Eudora
+	{id=0x15, location="Morph-O-Ray", host_item="Morph-O-Ray", req_items={{0xc}} },										--Oltanis
+	{id=0x16, location="Outside", host_item="Hydrodisplacer", req_items={{0x1a}} },										--Blarg
+	{id=0x17, location="Shady Salesman", host_item="R.Y.N.O.", req_items={{0x1b, 0x2}, {0x1b, 0x3}} },					--Rilgar
+	{id=0x18, location="Vendor", host_item="Drone Device", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Hoven
+	{id=0x19, location="Vendor", host_item="Decoy Glove", req_items={}, ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },		--Poki
+	{id=0x1a, location="Construction Zone", host_item="Trespasser", req_items={{0xc}} },								--Aridia
+    {id=0x1b, location="Turret Fight", host_item="Metaldetector", req_items={{0x1c}} },									--Batalia
+    {id=0x1c, location="Clank 1st Item", host_item="Magneboots", req_items={} },										--Orxon
+    {id=0x1d, location="Alien Queen", host_item="Grindboots", req_items={{0xc}} },										--Blarg
+    {id=0x1e, location="Save Skidd", host_item="Hoverboard", req_items={} },											--Aridia
+    {id=0x1f, location="Hoverboard Race", host_item="Hologuise", req_items={{0x1e,2,0xc,0x1d},{0x1e,3,0xc,0x1d}} },		--KaleboIII
+    {id=0x20, location="Steve", host_item="PDA", req_items={{0x1c}} },													--Oltanis
+    {id=0x21, location="Grind Rail", host_item="Map-O-Matic", req_items={{0x1d}} },										--KaleboIII
+    {id=0x22, location="Water path", host_item="Bolt Grabber", req_items={{4, 6}} },									--Quartu
+    {id=0x23, location="Water Lab", host_item="Persuader", req_items={{0x1a, 0x31, 0x16}} },							--Poki
+    {id=0x30, location="Hoverboard Race", host_item="Zoomerator", req_items={{0x1e,2},{0x1e,3}} },						--Rilgar
+    {id=0x31, location="Drill Guy", host_item="Raritanium", req_items={{0xc,2}, {0xc,3}} },								--Hoven
+    {id=0x32, location="Water path", host_item="Codebot", req_items={{4,6}} },											--Fleet
+    {id=0x34, location="Nanotech Vendor 1", host_item="Premium Nanotech", req_items={{6, 2}, {6, 3}} },							--Orxon
+    {id=0x35, location="Nanotech Vendor 2", host_item="Ultra Nanotech", req_items={{6, 3, 0x34, 0x1b}, {6, 2, 0x34, 0x1b} }},	--Orxon
 }
 
 infobots = {
-    {id=1, req_items={} },				-- Novalis "infobot" on Veldin1
-    {id=2, req_items={} },				-- Aridia infobot on Novalis
-    {id=3, req_items={} },				-- Kerwan infobot on Novalis 
-    {id=4, req_items={{2}, {3}} },			-- Eudora infobot on Kerwan
-    {id=5, req_items={} },				-- Rilgar infobot on Blarg
-    {id=6, req_items={{0x1a,0xc,2}, {0x1a, 0xc, 3}}},	-- Blarg infobot on Eudora
-    {id=7, req_items={{0xc,0x16}}},			-- Umbris infobot on Rilgar
-    {id=8, req_items={{0xc,0x16}}},			-- Batalia infobot on Umbris
-    {id=9, req_items={{0x1d}} },			-- Gaspar infobot on Batalia
-    {id=10, req_items={} },				-- Orxon infobot on Batalia
-    {id=0xb, req_items={} },				-- Pokitaru infobot on Orxon
-    {id=0xc, req_items={{6,0xc,0x1c, 3}} },		-- Hoven infobot on Orxon
-    {id=0xd, req_items={} },				-- Gemlik infobot on Hoven
-    {id=0xe, req_items={{0xc, 0x1c, 0x1a}} },		-- Oltanis infobot on Gemlik
-    {id=0xf, req_items={{0x1d}} }, 			-- Quartu infobot on Oltanis
-    {id=0x10, req_items={{0xc}} },    			-- KaleboIII infobot on Quartu
-    {id=0x11, req_items={{3, 0xc, 0x1f}} },		-- Fleet infobot on Quartu
-    {id=0x12, req_items={{0x1c,0x1f}} }			-- Veldin2 infobot on Fleet
+    {id=1, req_items={} },								-- Novalis "infobot" on Veldin1 Clank
+    {id=2, req_items={} },								-- Aridia infobot on Novalis, Water works
+    {id=3, req_items={} },								-- Kerwan infobot on Novalis, Save the Chairman 
+    {id=4, req_items={{2}, {3}} },						-- Eudora infobot on Kerwan, Train
+    {id=5, req_items={} },								-- Rilgar infobot on Blarg, Warship
+    {id=6, req_items={{0x1a,0xc,2}, {0x1a, 0xc, 3}}},	-- Blarg infobot on Eudora, Robot Lieutenant
+    {id=7, req_items={{0xc,0x16,2},{0xc,0x16,3}}},		-- Umbris infobot on Rilgar, Qwark's Trailer
+    {id=8, req_items={{0xc,0x16}}},						-- Batalia infobot on Umbris, Snagglebeast
+    {id=9, req_items={{0x1d}} },						-- Gaspar infobot on Batalia, Grind Rail
+    {id=10, req_items={} },								-- Orxon infobot on Batalia, Commando
+    {id=0xb, req_items={} },							-- Pokitaru infobot on Orxon, Clank 2
+    {id=0xc, req_items={{6,0xc,0x1c, 3}} },				-- Hoven infobot on Orxon, Chase the infobot
+    {id=0xd, req_items={{0x9},{0xb},{0xd},{0xf},{0x10},{0x13},{0x17}} },	-- Gemlik infobot on Hoven, Turret Fight
+    {id=0xe, req_items={{0xc, 0x1c, 0x1a}} },			-- Oltanis infobot on Gemlik, Defeat Qwark
+    {id=0xf, req_items={{0x1d}} }, 						-- Quartu infobot on Oltanis, Deaf guy
+    {id=0x10, req_items={{0xc}} },    					-- KaleboIII infobot on Quartu, Giant Clank Fight
+    {id=0x11, req_items={{3, 0xc, 0x1f}} },				-- Fleet infobot on Quartu, Clank's Mum
+    {id=0x12, req_items={{0x1c,0x1f}} }					-- Veldin2 infobot on Drek's Fleet, Battle through the ships
 }
 
 planets = {
-	{id=1, name="Novalis", infobots={2,3}, items={0x10}},
-	{id=2, name="Aridia", infobots={},items={0x1e, 0x1a, 5}},
-	{id=3, name="Kerwan", infobots={4}, items={0xc, 2, 0xf}},
-	{id=4, name="Eudora", infobots={6}, items={0x14, 0x9}},
-	{id=5, name="Rilgar", infobots={7}, items={0x30, 0x11, 0x17}},
-	{id=6, name="Blarg", infobots={5}, items={0x1d, 0x16, 0xe}},
-	{id=7, name="Umbris", infobots={8}, items={}},
-	{id=8, name="Batalia", infobots={9, 10}, items={0x1b, 0xb}},
-	{id=9, name="Gaspar", infobots={}, items={7, 0x12}},
-	{id=10,name="Orxon",  infobots={0xb, 0xc}, items={0x34, 0x35, 0x1c, 0xd}},
-	{id=11,name="Pokitaru",  infobots={}, items={3, 6, 0x23, 0x19}},
-	{id=12,name="Hoven",  infobots={0xd}, items={0x31, 4, 0x18}},
-	{id=13,name="Gemlik",  infobots={0xe}, items={}},
-	{id=14,name="Oltanis",  infobots={0xf}, items={0x20, 0x13, 0x15}},
-	{id=15,name="Quartu",  infobots={0x10, 0x11}, items={0x22}},
-	{id=16,name="KaleboIII",  infobots={}, items={0x1f, 0x21}},
-	{id=17,name="Fleet",  infobots={0x12}, items={0x32}}
+	{id=1, location="Clank", host_item="Novalis", infobots={2,3}, items={0x10}},								--Veldin1
+	{id=2, location="Water works", host_item="Aridia", infobots={},items={0x1e, 0x1a, 5}},						--Novalis
+	{id=3, location="Save the Chairman", host_item="Kerwan", infobots={4}, items={0xc, 2, 0xf}},				--Novalis
+	{id=4, location="Train", host_item="Eudora", infobots={6}, items={0x14, 0x9}},								--Kerwan
+	{id=5, location="Warship", host_item="Rilgar", infobots={7}, items={0x30, 0x11, 0x17}},						--Blarg
+	{id=6, location="Robot Lieutenant", host_item="Blarg", infobots={5}, items={0x1d, 0x16, 0xe}},				--Eudora
+	{id=7, location="Qwark's Trailer", host_item="Umbris", infobots={8}, items={}},								--Rilgar
+	{id=8, location="Snagglebeast", host_item="Batalia", infobots={9, 10}, items={0x1b, 0xb}},					--Umbris
+	{id=9, location="Grind Rail", host_item="Gaspar", infobots={}, items={7, 0x12}},							--Batalia
+	{id=10,location="Commando", host_item="Orxon",  infobots={0xb, 0xc}, items={0x34, 0x35, 0x1c, 0xd}},		--Batalia
+	{id=11,location="Clank 2nd Item", host_item="Pokitaru",  infobots={}, items={3, 6, 0x23, 0x19}},			--Orxon
+	{id=12,location="Chase the Infobot", host_item="Hoven",  infobots={0xd}, items={0x31, 4, 0x18}},			--Orxon
+	{id=13,location="Turret Fight", host_item="Gemlik",  infobots={0xe}, items={}},								--Hoven
+	{id=14,location="Defeat Qwark", host_item="Oltanis",  infobots={0xf}, items={0x20, 0x13, 0x15}},			--Gemlik
+	{id=15,location="Deaf Guy", host_item="Quartu",  infobots={0x10, 0x11}, items={0x22}},						--Oltanis
+	{id=16,location="Giant Clank Fight", host_item="KaleboIII",  infobots={}, items={0x1f, 0x21}},				--Quartu
+	{id=17,location="Clank's Mum", host_item="Fleet",  infobots={0x12}, items={0x32}}							--Quartu
 }
 
-function GetItem(name) 
+function GetItem(host_item) 
 	for i, item in ipairs(items) do
-		if name == item[name] then
-			return item
+		if host_item == item[host_item] then
+			return host_item
 		end
 	end
 end
@@ -397,7 +397,7 @@ function Randomize(seed)
 		
 		
 		-- Try to fill available item slots to meet requirements for another out, starting with first available out
-		--filewrite("# Filling available outs for " .. found_planet.name .. "\n")
+		--filewrite("# Filling available outs for " .. found_planet.host_item .. "\n")
 		for i, out in pairs(available_outs) do
 			--filewrite("# Available out: " .. out .. "\n")
 			-- Try to fill the requirement in previous planets first
@@ -494,7 +494,7 @@ function Randomize(seed)
 								if value == requirements_left[1] then
 									requirements_left[#requirements_left + 1] = requirements_left[1]
 									table.remove(requirements_left, 1)
-									filewrite("# Encountered illegal item to replace " .. item_slot.item.name .. "\n")
+									filewrite("# Encountered illegal item to replace " .. item_slot.item.host_item .. "\n")
 									goto continue_requirement_search
 								end
 							end
@@ -524,7 +524,7 @@ function Randomize(seed)
 							n_requirements_met = 0
 							for kk, requirement in pairs(reqs) do
 								if requirement == requirements_left[1] then
-									--print(item_slot.item.name .. " can not be replaced with " .. GetItemWithID(requirements_left[1]).name)
+									--print(item_slot.item.location .. " can not be replaced with " .. GetItemWithID(requirements_left[1]).host_item)
 									can_meet = false
 									n_requirements_met = 0
 								end
@@ -532,22 +532,22 @@ function Randomize(seed)
 								can_meet = false
 								for jj, available_item in pairs(item_list) do
 									if requirement == available_item then
-										--print(item_slot.item.name .. " met a requirement for " .. GetItemWithID(requirements_left[1]).name .. ", even though it is a requirement in a different combination")
+										--print(item_slot.item.host_item .. " met a requirement for " .. GetItemWithID(requirements_left[1]).location .. ", even though it is a requirement in a different combination")
 										can_meet = true
-										--filewrite("# " .. GetItemWithID(requirements_left[1]).name .. " met requirement for " .. GetItemWithID(requirement).name .. "\n")
+										--filewrite("# " .. GetItemWithID(requirements_left[1]).host_item .. " met requirement for " .. GetItemWithID(requirement).location .. "\n")
 										--n_requirements_met = n_requirements_met + 1
 									end
 								end
 								
 								if can_meet or has_item then
-									filewrite("# " .. GetItemWithID(requirements_left[1]).name .. " met requirement for " .. GetItemWithID(requirement).name .. "\n")
+									filewrite("# " .. GetItemWithID(requirements_left[1]).host_item .. " met requirement for " .. GetItemWithID(requirement).location .. "\n")
 								
 									n_requirements_met = n_requirements_met + 1
 								end
 							end
 							
 							if n_requirements_met >= #requirements then
-								filewrite("# " .. GetItemWithID(requirements_left[1]).name .. " n_requirements_met: " .. n_requirements_met .. ", #requirements: " .. #requirements .. "\n")
+								filewrite("# " .. GetItemWithID(requirements_left[1]).host_item .. " n_requirements_met: " .. n_requirements_met .. ", #requirements: " .. #requirements .. "\n")
 								can_meet = true
 								goto continue_item_assignment
 							end
@@ -560,7 +560,7 @@ function Randomize(seed)
 						::continue_item_assignment::
 						
 						if not can_meet then  -- Can't meet requirements yet, put this requirement at end of list
-							--print("Can't meet requirements for " .. GetItemWithID(requirements_left[1]).name .. ", bumping to end of list. Available slots left: " .. #available_item_slots)
+							--print("Can't meet requirements for " .. GetItemWithID(requirements_left[1]).location .. ", bumping to end of list. Available slots left: " .. #available_item_slots)
 							
 							local req = table.deepcopy(requirements_left[1])
 							table.remove(requirements_left, 1)
@@ -597,12 +597,12 @@ function Randomize(seed)
 							end
 							
 							if item_slot.item.ill_items ~= nil then
-								filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. GetItemWithID(requirements_left[1]).name .. '\"[color="#ff0000",label="' .. item_slot.item.name .. '",fontsize=8]\n')
+								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#ff0000",label="' .. item_slot.item.location .. '",fontsize=8]\n')
 							else
-								filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. GetItemWithID(requirements_left[1]).name .. '\"[color="#00ff00",label="' .. item_slot.item.name .. '",fontsize=8]\n')
+								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#00ff00",label="' .. item_slot.item.location .. '",fontsize=8]\n')
 							end
 							
-							--print(item_slot.item.name .. " -> " .. GetItemWithID(requirements_left[1]).name)
+							--print(item_slot.item.host_item .. " -> " .. GetItemWithID(requirements_left[1]).host_item)
 							item_list[item_slot.item.id] = requirements_left[1]
 							
 							RemoveItem(remaining_items, requirements_left[1])
@@ -643,15 +643,15 @@ function Randomize(seed)
 		--print(available_outs[out_index].infobot.id .. " -> " .. found_planet.id)
 		
 		if available_outs[out_index].planet == 0 then
-			filewrite('"Veldin1" -> "' .. found_planet.name .. '"[label="Novalis",fontsize=8]\n')
+			filewrite('"Veldin1" -> "' .. found_planet.host_item .. '"[label="Clank",fontsize=8]\n')
 		else
 			local orig_infobot_name = "Veldin2"
 			
 			if available_outs[out_index].infobot.id < 18 then
-				orig_infobot_name = planets[available_outs[out_index].infobot.id].name  -- Fix special case for Veldin2
+				orig_infobot_name = planets[available_outs[out_index].infobot.id].location  -- Fix special case for Veldin2
 			end
 		
-			filewrite('"' .. planets[available_outs[out_index].planet].name .. '" -> "' .. found_planet.name .. '"[label="' .. orig_infobot_name .. '",fontsize=8]\n')
+			filewrite('"' .. planets[available_outs[out_index].planet].host_item .. '" -> "' .. found_planet.host_item .. '"[label="' .. orig_infobot_name .. '",fontsize=8]\n')
 		end
 		
 		planet_list[available_outs[out_index].infobot.id] = found_planet.id  -- Replace infobot with next planet we found
@@ -661,8 +661,8 @@ function Randomize(seed)
 		-- Add Veldin2 to list of available planets if we've placed all other planets.
 		-- This doesn't necessarily make the longest path, but it's good enough for me. 
 		if #available_planets <= 0 and #available_outs > 0 then
-			available_planets[1] = {id=18,name="Veldin2",  infobots={}, items={}}
-			planets[18] = {id=18,name="Veldin2",  infobots={}, items={}}
+			available_planets[1] = {id=18,location="Battle through the ships",host_item="Veldin2",  infobots={}, items={}}
+			planets[18] = {id=18,host_item="Veldin2",  infobots={}, items={}}
 		end
 		
 		if #available_planets <= 0 then
@@ -694,12 +694,12 @@ function Randomize(seed)
 		end
 	
 		if item_slot.item.ill_items ~= nil then
-			filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. remaining_items[1].name .. '\"[color="#ff00ff",label="' .. item_slot.item.name .. '",fontsize=8]\n')
+			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#ff00ff",label="' .. item_slot.item.location .. '",fontsize=8]\n')
 		else
-			filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. remaining_items[1].name .. '\"[color="#0000ff",label="' .. item_slot.item.name .. '",fontsize=8]\n')
+			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#0000ff",label="' .. item_slot.item.location .. '",fontsize=8]\n')
 		end
 	
-		--print(item_slot.item.name .. " -> " .. remaining_items[1].name)
+		--print(item_slot.item.host_item .. " -> " .. remaining_items[1].host_item)
 		
 		
 		item_list[item_slot.item.id] = remaining_items[1].id
