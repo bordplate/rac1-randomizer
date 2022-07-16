@@ -39,24 +39,24 @@ items = {
 }
 
 infobots = {
-  {id=0x01, req_items={} },				                       -- Veldin1 -> Novalis
-  {id=0x02, req_items={} },				                       -- Novalis -> Aridia
-  {id=0x03, req_items={} },				                       -- Novalis -> Kerwan
-  {id=0x04, req_items={{0x02}, {0x03}} },	               -- Kerwan -> Eudora
-  {id=0x05, req_items={} },				                       -- Blarg -> Rilgar
+  {id=0x01, req_items={} },                                 -- Veldin1 -> Novalis
+  {id=0x02, req_items={} },                                 -- Novalis -> Aridia
+  {id=0x03, req_items={} },                                 -- Novalis -> Kerwan
+  {id=0x04, req_items={{0x02}, {0x03}} },                   -- Kerwan -> Eudora
+  {id=0x05, req_items={} },                                 -- Blarg -> Rilgar
   {id=0x06, req_items={{0x1A,0x0C,0x02}, {0x1A,0x0C,0x03}} }, -- Eudora -> Blarg
-  {id=0x07, req_items={{0x0C,0x16}} },			             -- Rilgar -> Umbris
-  {id=0x08, req_items={{0x0C,0x16}} },			             -- Umbris -> Batalia
-  {id=0x09, req_items={{0x1D}} },			                   -- Batalia -> Gaspar
-  {id=0x0A, req_items={} },				                       -- Batalia -> Orxon
-  {id=0x0B, req_items={} },				                       -- Orxon -> Pokitaru
-  {id=0x0C, req_items={{0x06,0x0C,0x1C,0x03}} },	       -- Orxon -> Hoven
-  {id=0x0D, req_items={} },				                       -- Hoven -> Gemlik
-  {id=0x0E, req_items={{0x0C, 0x1C, 0x1A}} },		         -- Gemlik -> Oltanis
-  {id=0x0F, req_items={{0x1D}} }, 			                 -- Oltanis -> Quartu
-  {id=0x10, req_items={{0x0C}} },    			               -- Quartu -> KaleboIII
-  {id=0x11, req_items={{0x03,0x0C,0x1F}} },	             -- Quartu -> Fleet
-  {id=0x12, req_items={{0x1C,0x1F}} }			               -- Fleet -> Veldin2
+  {id=0x07, req_items={{0x0C,0x16}} },                      -- Rilgar -> Umbris
+  {id=0x08, req_items={{0x0C,0x16}} },                      -- Umbris -> Batalia
+  {id=0x09, req_items={{0x1D}} },                           -- Batalia -> Gaspar
+  {id=0x0A, req_items={} },                                 -- Batalia -> Orxon
+  {id=0x0B, req_items={} },                                 -- Orxon -> Pokitaru
+  {id=0x0C, req_items={{0x06,0x0C,0x1C,0x03}} },            -- Orxon -> Hoven
+  {id=0x0D, req_items={} },                                 -- Hoven -> Gemlik
+  {id=0x0E, req_items={{0x0C, 0x1C, 0x1A}} },               -- Gemlik -> Oltanis
+  {id=0x0F, req_items={{0x1D}} },                           -- Oltanis -> Quartu
+  {id=0x10, req_items={{0x0C}} },                           -- Quartu -> KaleboIII
+  {id=0x11, req_items={{0x03,0x0C,0x1F}} },                 -- Quartu -> Fleet
+  {id=0x12, req_items={{0x1C,0x1F}} }                       -- Fleet -> Veldin2
 }
 
 planets = {
