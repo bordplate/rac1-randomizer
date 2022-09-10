@@ -52,7 +52,7 @@ infobots = {
   {id=0x0B, req_items={} },                                 -- Orxon -> Pokitaru
   {id=0x0C, req_items={{0x06,0x0C,0x1C,0x03}} },            -- Orxon -> Hoven
   {id=0x0D, req_items={} },                                 -- Hoven -> Gemlik
-  {id=0x0E, req_items={{0x0C, 0x1C, 0x1A}} },               -- Gemlik -> Oltanis
+  {id=0x0E, req_items={{0x0C, 0x1C, 0x1A, 0x0B}, {0x0C, 0x1C, 0x1A, 0x0D}} },         -- Gemlik -> Oltanis
   {id=0x0F, req_items={{0x1D}} },                           -- Oltanis -> Quartu
   {id=0x10, req_items={{0x0C}} },                           -- Quartu -> KaleboIII
   {id=0x11, req_items={{0x03,0x0C,0x1F}} },                 -- Quartu -> Fleet
