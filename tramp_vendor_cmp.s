@@ -1,3 +1,7 @@
+; I can't remember what this is for, what is does, or why it's necessary.
+; It's some sort of trampoline, so it probably just sets up some vars
+;     before jumping into a vendor function. 
+
 _start:
 	mr r28, r3
 	mr r3, r6

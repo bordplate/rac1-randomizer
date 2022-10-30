@@ -176,7 +176,7 @@ typedef struct {
     char r;
 } color;
 
-typedef struct {
+struct Moby {
     // The moby position for collision purposes. Usually should not be touched.
     vec4 coll_pos;
     // The moby position.
@@ -221,7 +221,7 @@ typedef struct {
     unsigned short type;
     // asdf3
     char asdf3[0x58];
-} moby;
+};
 
 typedef struct {
     short y_min;

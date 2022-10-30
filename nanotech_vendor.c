@@ -1,52 +1,5 @@
 #include "npea00385.h"
 
-struct Moby {
-    // The moby position for collision purposes. Usually should not be touched.
-    vec4 coll_pos;
-    // The moby position.
-    vec4 pos;
-    // The moby state.
-    char state;
-    // The texture mode.
-    char texture_mode;
-    // The moby opacity.
-    unsigned short opacity;
-    // The moby model.
-    void* model;
-    // The parent moby, if existing.
-    struct moby* parent;
-    // The 3D scaling applied to the model.
-    float scale;
-    // Unknown, 0x30
-    char unk_30;
-    // Whether or not the moby is visible (readonly).
-    char visible;
-    // The distance at which the moby will start fading out.
-    short render_distance;
-    // Unknown, 0x34
-    void* unk_34;
-    // Controls the coloring of the moby.
-    color color;
-    // Controls the shading of the moby, through mechanisms unknown.
-    unsigned int shading;
-    // The moby rotation in radians. Typically only Z needs to be changed.
-    vec4 rot;
-    // The previous frame number of the current animation.
-    char prev_anim_frame;
-    // The current frame number of the current animation.
-    char curr_anim_frame;
-    // asdf
-    char asdf[0x26];
-    // The moby's pVars.
-    void* pvars;
-    // asdf2
-    char asdf2[0x2A];
-    // The type of moby it is.
-    unsigned short type;
-    // asdf3
-    char asdf3[0x58];
-};
-
 #define has_premium_nanotech (*((char*)0x0096bff4))
 #define has_ultra_nanotech (*((char*)0x0096bff5))
 
@@ -55,32 +8,48 @@ struct Moby {
 
 #define items_map ((char*)0xB00050)
 
+// This is basically a reimplementation of the Nanotech vendor (on Orxon) update function
+//	  with randomizer features obviously. 
+// It turned out to be easier to just reimplement it than to try to patch 
+//    instructions within the function. 
+// Note that this implementation does not give trophies, and it also fixes
+//	  a bug in the original game where you actually needed 30001 bolts to buy
+//	  the second upgrade, even though the game states you only need 30000. 
 void _start(struct Moby* self) {
+	// If the player does not have the first Nanotech upgrade. 
 	if (items_map[0x34] == 0) {
 		if (player_bolts < 4000) {
+			// Show a message that you need 4000 bolts to purchase this upgrade. 
 			show_persistent_message(1, 0x2720);
 		} else {
+			// Player has enough bolts to buy, show message that they need to press triangle to purchase. 
 			int message_shown = show_persistent_message(1, 0x271e);
 			
 			if ((pressed_buttons & BTN_TRI) != 0 && message_shown != 0) {
+				// Player has pressed triangle so we unlock item, take bolts and play corresponding In-Level Movie (ILM)
 				unlock_item(0x34);
 				player_bolts -= 4000;
 				play_ilm(0, 0);
 				
+				// After(I think?) the ILM we set Nanotech vendor state back to 1
 				self->state = 1;
 			}
 		}
 	} else if (items_map[0x35] == 0 && has_premium_nanotech == 1) {
 		if (player_bolts < 30000) {
+			// Show a message that you need 30000 bolts to purchase this upgrade. 
 			show_persistent_message(1, 0x2721);
 		} else {
+			// Player has enough bolts to buy, show message that they need to press triangle to purchase. 
 			int message_shown = show_persistent_message(1, 0x271f);
 			
 			if ((pressed_buttons & BTN_TRI) != 0 && message_shown != 0) {
+				// Player has pressed triangle so we unlock item, take bolts and play corresponding In-Level Movie
 				unlock_item(0x35);
 				player_bolts -= 30000;
 				play_ilm(1, 0);
 				
+				// After(I think?) the ILM we set Nanotech vendor state back to 1
 				self->state = 1;
 			}
 		}
