@@ -1,3 +1,8 @@
+// This function changes the oClass for the vendor to present items. 
+// Without this, the game crashes when you try to go to unsupported items in the vendor,
+//     like thruster-pack, heli-pack, etc. because it can't load the right model.  
+// So what we do here is a custom way to give the vendor the right class ID to load the right model.
+
 int _start(int item) {
 	int class = 0;
 	
@@ -43,6 +48,7 @@ int _start(int item) {
 			break;
 	}
 	
+	// Unknown item, set to chicken class. 
 	if (item > 0x23) {
 		class = 0x10e;
 	}
