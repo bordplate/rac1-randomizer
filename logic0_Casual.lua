@@ -39,24 +39,24 @@ items = {
 }
 
 infobots = {
-    {id=0x01,	req_items={} },																		-- Novalis "infobot" on Veldin1 Clank
-    {id=0x02,	req_items={} },																		-- Aridia infobot on Novalis, Water works
-	{id=0x03,	req_items={} },																		-- Kerwan infobot on Novalis, Save the Chairman 
-    {id=0x04,	req_items={{0x02}, {0x03}} },														-- Eudora infobot on Kerwan, Train
-    {id=0x05,	req_items={} },																		-- Rilgar infobot on Blarg, Warship
-    {id=0x06,	req_items={{0x1A, 0x0C, 0x02},{0x1A, 0x0C, 0x03}}},									-- Blarg infobot on Eudora, Robot Lieutenant
-    {id=0x07,	req_items={{0x0C, 0x16, 0x02},{0x0C, 0x16, 0x03}}},									-- Umbris infobot on Rilgar, Qwark's Trailer
+    {id=0x01,	req_items={} },																						-- Novalis "infobot" on Veldin1 Clank
+    {id=0x02,	req_items={} },																						-- Aridia infobot on Novalis, Water works
+	{id=0x03,	req_items={} },																						-- Kerwan infobot on Novalis, Save the Chairman 
+    {id=0x04,	req_items={{0x02}, {0x03}} },																		-- Eudora infobot on Kerwan, Train
+    {id=0x05,	req_items={} },																						-- Rilgar infobot on Blarg, Warship
+    {id=0x06,	req_items={{0x1A, 0x0C, 0x02},{0x1A, 0x0C, 0x03}}},													-- Blarg infobot on Eudora, Robot Lieutenant
+    {id=0x07,	req_items={{0x0C, 0x16, 0x02},{0x0C, 0x16, 0x03}}},													-- Umbris infobot on Rilgar, Qwark's Trailer
     {id=0x08,	req_items={{0x0C, 0x16, 0x02, 0x0B}, {0x0C, 0x16, 0x03, 0x0B}, {0x0C, 0x16, 0x02, 0x0D}, {0x0C, 0x16, 0x03, 0x0D}, {0x0C, 0x16, 0x02, 0x0F}, {0x0C, 0x16, 0x03, 0x0F}, {0x0C, 0x16, 0x02, 0x10}, {0x0C, 0x16, 0x03, 0x10}, {0x0C, 0x16, 0x02, 0x11}, {0x0C, 0x16, 0x03, 0x11}, {0x0C, 0x16, 0x02, 0x12}, {0x0C, 0x16, 0x03, 0x12}, {0x0C, 0x16, 0x02, 0x13}, {0x0C, 0x16, 0x03, 0x13}, {0x0C, 0x16, 0x02, 0x17}, {0x0C, 0x16, 0x03, 0x17}}},	-- Batalia infobot on Umbris, Snagglebeast
-    {id=0x09,	req_items={{0x1D}} },																-- Gaspar infobot on Batalia, Grind Rail
-    {id=0x0A,	req_items={} },																		-- Orxon infobot on Batalia, Commando
-    {id=0x0B,	req_items={} },																		-- Pokitaru infobot on Orxon, Clank 2
-    {id=0x0C,	req_items={{0x06,0x0C,0x1C, 0x03}} },												-- Hoven infobot on Orxon, Chase the infobot
-    {id=0x0D,	req_items={{0x09},{0x0B},{0x0D},{0x0F},{0x10},{0x13},{0x17},{0xc,2,5},{0xc,3,5}} },	-- Gemlik infobot on Hoven, Turret Fight
-    {id=0x0E,	req_items={{0x0C, 0x1C, 0x1A, 0x0B}, {0x0C, 0x1C, 0x1A, 0x0D}} },					-- Oltanis infobot on Gemlik, Defeat Qwark
-    {id=0x0F,	req_items={{0x1D}} }, 																-- Quartu infobot on Oltanis, Deaf guy
-    {id=0x10,	req_items={{0x0C}} },    															-- KaleboIII infobot on Quartu, Giant Clank Fight
-    {id=0x11,	req_items={{0x03, 0x0C, 0x1F}} },													-- Fleet infobot on Quartu, Clank's Mum
-    {id=0x12,	req_items={{0x1C,0x1F}} }															-- Veldin2 infobot on Drek's Fleet, Battle through the ships
+    {id=0x09,	req_items={{0x1D}} },																				-- Gaspar infobot on Batalia, Grind Rail
+    {id=0x0A,	req_items={} },																						-- Orxon infobot on Batalia, Commando
+    {id=0x0B,	req_items={} },																						-- Pokitaru infobot on Orxon, Clank 2
+    {id=0x0C,	req_items={{0x06, 0x0C, 0x1C, 0x03}} },																-- Hoven infobot on Orxon, Chase the infobot
+    {id=0x0D,	req_items={{0x09},{0x0B},{0x0D},{0x0F},{0x10},{0x13},{0x17},{0x0C,0x02,0x05},{0x0C,0x03,0x05}} },	-- Gemlik infobot on Hoven, Turret Fight
+    {id=0x0E,	req_items={{0x0C, 0x1C, 0x1A, 0x0B}, {0x0C, 0x1C, 0x1A, 0x0D}} },									-- Oltanis infobot on Gemlik, Defeat Qwark
+    {id=0x0F,	req_items={{0x1D}} }, 																				-- Quartu infobot on Oltanis, Deaf guy
+    {id=0x10,	req_items={{0x0C}} },    																			-- KaleboIII infobot on Quartu, Giant Clank Fight
+    {id=0x11,	req_items={{0x03, 0x0C, 0x1F}} },																	-- Fleet infobot on Quartu, Clank's Mum
+    {id=0x12,	req_items={{0x1C,0x1F}} }																			-- Veldin2 infobot on Drek's Fleet, Battle through the ships
 }
 
 planets = {
@@ -67,7 +67,7 @@ planets = {
 	{id=0x05,	location="Warship",				host_item="Rilgar",		infobots={0x07},		items={0x30, 0x11, 0x17}},			--Blarg
 	{id=0x06,	location="Robot Lieutenant",	host_item="Blarg",		infobots={0x05},		items={0x1D, 0x16, 0x0E}},			--Eudora
 	{id=0x07,	location="Qwark's Trailer",		host_item="Umbris",		infobots={8},			items={}},							--Rilgar
-	{id=0x08,	location="Snagglebeast",		host_item="Batalia",	infobots={0x09, 10},	items={0x1B, 0x0B}},				--Umbris
+	{id=0x08,	location="Snagglebeast",		host_item="Batalia",	infobots={0x09, 0x10},	items={0x1B, 0x0B}},				--Umbris
 	{id=0x09,	location="Grind Rail",			host_item="Gaspar",		infobots={},			items={0x07, 0x12}},				--Batalia
 	{id=0x0A,	location="Commando",			host_item="Orxon",		infobots={0x0B, 0x0C},	items={0x34, 0x35, 0x1C, 0x0D}},	--Batalia
 	{id=0x0B,	location="Clank 2nd Item",		host_item="Pokitaru",	infobots={},			items={0x03, 0x06, 0x23, 0x19}},	--Orxon

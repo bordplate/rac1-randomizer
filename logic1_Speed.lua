@@ -39,24 +39,24 @@ items = {
 }
 
 infobots = {
-    {id=0x01, req_items={} },												-- Novalis "infobot" on Veldin1 Clank
-    {id=0x02, req_items={} },												-- Aridia infobot on Novalis, Water works
-    {id=0x03, req_items={} },												-- Kerwan infobot on Novalis, Save the Chairman 
-    {id=0x04, req_items={{0x02}, {0x03}, {0x20}} },							-- Eudora infobot on Kerwan, Train
-    {id=0x05, req_items={} },												-- Rilgar infobot on Blarg, Warship
-    {id=0x06, req_items={{0x02}, {0x03}, {0x20}, {0x19}} },					-- Blarg infobot on Eudora, Robot Lieutenant
-    {id=0x07, req_items={{0x02}, {0x03}, {0x20}, {0x0C}} },					-- Umbris infobot on Rilgar, Qwark's Trailer
-    {id=0x08, req_items={{0x0C}, {0x02}, {0x03}, {0x20}} },					-- Batalia infobot on Umbris, Snagglebeast
-    {id=0x09, req_items={{0x1D}, {0x02}, {0x20}} },							-- Gaspar infobot on Batalia, Grind Rail
-    {id=0x0A, req_items={} },												-- Orxon infobot on Batalia, Commando
-    {id=0x0B, req_items={} },												-- Pokitaru infobot on Orxon, Clank 2
-    {id=0x0C, req_items={{0x06,0x02}, {0x06,0x03}, {0x06,0x20}} },			-- Hoven infobot on Orxon, Chase the infobot
-    {id=0x0D, req_items={} },												-- Gemlik infobot on Hoven, Turret Fight
     {id=0x0E, req_items={{0x0C,0x1C,0x1A,0x0B}, {0x02}, {0x03}, {0x20}} },	-- Oltanis infobot on Gemlik, Defeat Qwark
-    {id=0x0F, req_items={{0x1D}, {0x1C}, {0x20}} },							-- Quartu infobot on Oltanis, Deaf guy
-    {id=0x10, req_items={{0x0C}, {0x02}, {0x03}, {0x20}} },					-- KaleboIII infobot on Quartu, Giant Clank Fight
-    {id=0x11, req_items={{0x02}, {0x03}, {0x20}} },							-- Fleet infobot on Quartu, Clank's Mum
-    {id=0x12, req_items={{0x03}, {0x1C}, {0x19}, {0x20}} }					-- Veldin2 infobot on Drek's Fleet, Battle through the ships
+    {id=0x01, req_items={} },																		-- Novalis "infobot" on Veldin1 Clank
+    {id=0x02, req_items={} },																		-- Aridia infobot on Novalis, Water works
+    {id=0x03, req_items={} },																		-- Kerwan infobot on Novalis, Save the Chairman 
+    {id=0x04, req_items={{0x02}, {0x03}, {0x20}} },													-- Eudora infobot on Kerwan, Train
+    {id=0x05, req_items={} },																		-- Rilgar infobot on Blarg, Warship
+    {id=0x06, req_items={{0x02}, {0x03}, {0x20}, {0x19}} },											-- Blarg infobot on Eudora, Robot Lieutenant
+    {id=0x07, req_items={{0x02}, {0x03}, {0x20}, {0x0C}} },											-- Umbris infobot on Rilgar, Qwark's Trailer
+    {id=0x08, req_items={{0x0C}, {0x02}, {0x03}, {0x20}} },											-- Batalia infobot on Umbris, Snagglebeast
+    {id=0x09, req_items={{0x1D}, {0x02}, {0x20}} },													-- Gaspar infobot on Batalia, Grind Rail
+    {id=0x0A, req_items={} },																		-- Orxon infobot on Batalia, Commando
+    {id=0x0B, req_items={} },																		-- Pokitaru infobot on Orxon, Clank 2
+    {id=0x0C, req_items={{0x06,0x02}, {0x06,0x03}, {0x06,0x20}} },									-- Hoven infobot on Orxon, Chase the infobot
+    {id=0x0D, req_items={} },																		-- Gemlik infobot on Hoven, Turret Fight
+    {id=0x0F, req_items={{0x1D}, {0x1C}, {0x20}} },													-- Quartu infobot on Oltanis, Deaf guy
+    {id=0x10, req_items={{0x0C}, {0x02}, {0x03}, {0x20}} },											-- KaleboIII infobot on Quartu, Giant Clank Fight
+    {id=0x11, req_items={{0x02}, {0x03}, {0x20}} },													-- Fleet infobot on Quartu, Clank's Mum
+    {id=0x12, req_items={{0x03}, {0x1C}, {0x19}, {0x20}} }											-- Veldin2 infobot on Drek's Fleet, Battle through the ships
 }
 
 planets = {
