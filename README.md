@@ -8,8 +8,7 @@
 The randomizer is currently only supported on PS3 with digital PAL copy of Ratchet & Clank 1. There are no plans to support emulator or NTSC at this point. 
 
 ## EmoTracker item tracker
-Item tracker for EmoTracker is available, courtesy of Myth197 and DukeDragon28.  
-[github.com/Myth197/RAC-Rando-Tracker](https://github.com/Myth197/RAC-Rando-Tracker)
+Item tracker for [EmoTracker](https://emotracker.net/service/install/emotracker_setup.exe) is available, courtesy of Myth197 and DukeDragon28.
 
 ## Installation
 A homebrew enabled PS3 with WebMAN is required. Then use [RaCMAN](https://github.com/MichaelRelaxen/racman).  
@@ -29,6 +28,8 @@ Add `# graph: false` to the top of the `seed.txt` file to disable debug graph ge
 ## What does it do?
 - Infobots and weapons/items/gadgets are randomized.
 	- You always get infobots where you get infobots, and always weapons/items/gadgets where you get those. So there are two randomized pools. 
+	- Weapons from Vendors are randomized, any Planets you reach that would normally unlock a new weapon in the vendor in the vanilla game will add a randomized item to the Vendors.
+	- Items in Vendors will always have their original price, for example the RYNO will always cost 150,000 Bolts wherever you try and buy it from.
 - Randomizer makes sure to generate solvable paths
 - Bolt denominations are increased to avoid excessive bolt grinding
   - 1 bolt -> 5 bolts
