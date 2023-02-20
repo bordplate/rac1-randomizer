@@ -30,7 +30,7 @@ items = {
     {id=0x20,	location="Steve",				host_item="PDA",				req_items={{0x1C}} },																			--Oltanis
     {id=0x21,	location="Grind Rail",			host_item="Map-O-Matic",		req_items={{0x1D}, {0x20}} },																	--KaleboIII
     {id=0x22,	location="Water path",			host_item="Bolt Grabber",		req_items={{0x04, 0x06}, {0x20}, {0x02}, {0x03}} },												--Quartu
-    {id=0x23,	location="Water Lab",			host_item="Persuader",			req_items={{0x31, 0x1A, 0x16}, {0x31,0x06}} },													--Poki
+    {id=0x23,	location="Water Lab",			host_item="Persuader",			req_items={{0x31, 0x1A, 0x16}, {0x31,0x06}, {0x31, 0x19, 0x20}} },								--Poki
     {id=0x30,	location="Hoverboard Race",		host_item="Zoomerator",			req_items={{0x02}, {0x03}, {0x20}} },															--Rilgar
     {id=0x31,	location="Drill Guy",			host_item="Raritanium",			req_items={{0x0C}, {0x02}, {0x03}, {0x20}} },													--Hoven
     {id=0x32,	location="Water path",			host_item="Codebot",			req_items={} },																					--Fleet
@@ -39,7 +39,6 @@ items = {
 }
 
 infobots = {
-    {id=0x0E, req_items={{0x0C,0x1C,0x1A,0x0B}, {0x02}, {0x03}, {0x20}} },	-- Oltanis infobot on Gemlik, Defeat Qwark
     {id=0x01, req_items={} },																		-- Novalis "infobot" on Veldin1 Clank
     {id=0x02, req_items={} },																		-- Aridia infobot on Novalis, Water works
     {id=0x03, req_items={} },																		-- Kerwan infobot on Novalis, Save the Chairman 
@@ -53,6 +52,7 @@ infobots = {
     {id=0x0B, req_items={} },																		-- Pokitaru infobot on Orxon, Clank 2
     {id=0x0C, req_items={{0x06,0x02}, {0x06,0x03}, {0x06,0x20}} },									-- Hoven infobot on Orxon, Chase the infobot
     {id=0x0D, req_items={} },																		-- Gemlik infobot on Hoven, Turret Fight
+    {id=0x0E, req_items={{0x0C,0x1C,0x1A,0x0B}, {0x0C,0x1C,0x1A,0x0D}, {0x02}, {0x03}, {0x20}} },	-- Oltanis infobot on Gemlik, Defeat Qwark
     {id=0x0F, req_items={{0x1D}, {0x1C}, {0x20}} },													-- Quartu infobot on Oltanis, Deaf guy
     {id=0x10, req_items={{0x0C}, {0x02}, {0x03}, {0x20}} },											-- KaleboIII infobot on Quartu, Giant Clank Fight
     {id=0x11, req_items={{0x02}, {0x03}, {0x20}} },													-- Fleet infobot on Quartu, Clank's Mum
