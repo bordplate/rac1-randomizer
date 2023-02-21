@@ -3,12 +3,12 @@ items = {
     {id=0x03, 	location="Bob's Shop",			host_item="Thruster-pack",		req_items={} },											 											--Poki
     {id=0x04, 	location="Edwina's Shop",		host_item="Hydro-pack",			req_items={{0x16}} },										 										--Hoven
     {id=0x05, 	location="Skidd's Agent",		host_item="Sonic Summoner",		req_items={{0x30}} },									 											--Aridia
-    {id=0x06, 	location="Ship Fight",			host_item="O2 Mask",			req_items={{0x07, 0x03}} },												 								--Poki
+    {id=0x06, 	location="Ship Fight",			host_item="O2 Mask",			req_items={{0x07, 0x03}} },												 							--Poki
     {id=0x07, 	location="Pilot's Helmet",		host_item="Pilot's Helmet",		req_items={} },										 												--Gaspar
 	{id=0x09, 	location="Suck Cannon",			host_item="Suck Cannon",		req_items={{0x02}, {0x03}} },								 										--Eudora
 	{id=0x0B, 	location="Vendor",				host_item="Devastator",			req_items={}, 											ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Batalia
 	{id=0x0C, 	location="Fitness Course",		host_item="Swingshot",			req_items={} }, 											 										--Kerwan
-	{id=0x0D, 	location="Vendor",				host_item="Visibomb",			req_items={{0x06}}, 									ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Orxon
+	{id=0x0D, 	location="Vendor",				host_item="Visibomb",			req_items={}, 											ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Orxon
 	{id=0x0E, 	location="Vendor",				host_item="Taunter",			req_items={}, 											ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Blarg
 	{id=0x0F, 	location="Vendor",				host_item="Blaster",			req_items={}, 											ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Kerwan
 	{id=0x10, 	location="Vendor",				host_item="Pyrocitor",			req_items={}, 											ill_items={0x30, 0x31, 0x32, 0x34, 0x35} },	--Novalis	
