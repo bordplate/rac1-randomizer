@@ -35,7 +35,7 @@ items = {
     {id=0x20, name="PDA",             req_items={{0x1C}} },
     {id=0x21, name="Map-O-Matic",     req_items={{0x1D}, {0x20,0x03}} },
     {id=0x22, name="Bolt Grabber",    req_items={{0x04,0x06}, {0x20}} },
-    {id=0x23, name="Persuader",       req_items={{0x31,0x1A,0x16}} },
+    {id=0x23, name="Persuader",       req_items={{0x31,0x1A,0x16}, {0x31,0x06}} },
     {id=0x30, name="Zoomerator",      req_items={{0x02}, {0x03}, {0x20}} },
     {id=0x31, name="Raritanium",      req_items={{0x0C}, {0x02}, {0x03}} },
     {id=0x32, name="Codebot",         req_items={} },
