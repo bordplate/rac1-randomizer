@@ -41,24 +41,24 @@ items = {
 }
 
 infobots = {
-  {id=0x01, req_items={} },                                 -- Veldin1 -> Novalis
-  {id=0x02, req_items={} },                                 -- Novalis -> Aridia
-  {id=0x03, req_items={} },                                 -- Novalis -> Kerwan
-  {id=0x04, req_items={{keyid.heli_pack}, {keyid.thruster_pack}} },                   -- Kerwan -> Eudora
-  {id=0x05, req_items={} },                                 -- Blarg -> Rilgar
+  {id=0x01, req_items={} }, -- Veldin1 -> Novalis
+  {id=0x02, req_items={} }, -- Novalis -> Aridia
+  {id=0x03, req_items={} }, -- Novalis -> Kerwan
+  {id=0x04, req_items={{keyid.heli_pack}, {keyid.thruster_pack}} }, -- Kerwan -> Eudora
+  {id=0x05, req_items={} }, -- Blarg -> Rilgar
   {id=0x06, req_items={{keyid.trespasser,keyid.swingshot,keyid.heli_pack}, {keyid.trespasser,keyid.swingshot,keyid.thruster_pack}} }, -- Eudora -> Blarg
-  {id=0x07, req_items={{keyid.swingshot,keyid.hydrodisplacer}} },                      -- Rilgar -> Umbris
-  {id=0x08, req_items={{keyid.swingshot,keyid.hydrodisplacer}} },                      -- Umbris -> Batalia
-  {id=0x09, req_items={{keyid.grindboots}} },                           -- Batalia -> Gaspar
-  {id=0x0A, req_items={} },                                 -- Batalia -> Orxon
-  {id=0x0B, req_items={} },                                 -- Orxon -> Pokitaru
-  {id=0x0C, req_items={{keyid.o2_mask,keyid.swingshot,keyid.magneboots,keyid.thruster_pack}} },            -- Orxon -> Hoven
-  {id=0x0D, req_items={{keyid.devastator}, {keyid.visibomb}, {keyid.blaster}} },                                 -- Hoven -> Gemlik
-  {id=0x0E, req_items={{keyid.swingshot,keyid.magneboots,keyid.trespasser,keyid.devastator}, {keyid.swingshot, keyid.magneboots,keyid.trespasser, keyid.visibomb}} },         -- Gemlik -> Oltanis
-  {id=0x0F, req_items={{keyid.grindboots}} },                           -- Oltanis -> Quartu
-  {id=0x10, req_items={{keyid.swingshot}} },                           -- Quartu -> KaleboIII
-  {id=0x11, req_items={{0x03,keyid.swingshot,keyid.hologuise}} },                 -- Quartu -> Fleet
-  {id=0x12, req_items={{keyid.magneboots,keyid.hologuise}} }                       -- Fleet -> Veldin2
+  {id=0x07, req_items={{keyid.swingshot,keyid.hydrodisplacer}} }, -- Rilgar -> Umbris
+  {id=0x08, req_items={{keyid.swingshot,keyid.hydrodisplacer}} }, -- Umbris -> Batalia
+  {id=0x09, req_items={{keyid.grindboots}} }, -- Batalia -> Gaspar
+  {id=0x0A, req_items={} }, -- Batalia -> Orxon
+  {id=0x0B, req_items={} }, -- Orxon -> Pokitaru
+  {id=0x0C, req_items={{keyid.o2_mask,keyid.swingshot,keyid.magneboots,keyid.thruster_pack}} }, -- Orxon -> Hoven
+  {id=0x0D, req_items={{keyid.devastator}, {keyid.visibomb}, {keyid.blaster}} }, -- Hoven -> Gemlik
+  {id=0x0E, req_items={{keyid.swingshot,keyid.magneboots,keyid.trespasser,keyid.devastator}, {keyid.swingshot, keyid.magneboots,keyid.trespasser, keyid.visibomb}} }, -- Gemlik -> Oltanis
+  {id=0x0F, req_items={{keyid.grindboots}} }, -- Oltanis -> Quartu
+  {id=0x10, req_items={{keyid.swingshot}} }, -- Quartu -> KaleboIII
+  {id=0x11, req_items={{keyid.thruster_pack,keyid.swingshot,keyid.hologuise}} }, -- Quartu -> Fleet
+  {id=0x12, req_items={{keyid.magneboots,keyid.hologuise}} } -- Fleet -> Veldin2
 }
 
 planets = {
@@ -75,7 +75,7 @@ planets = {
   {id=11, name="Pokitaru", infobots={},                           items={keyid.thruster_pack,keyid.o2_mask,keyid.persuader,keyid.decoy_glove} },
   {id=12, name="Hoven",    infobots={keyid.gemlik},               items={keyid.raritanium,keyid.hydro_pack,keyid.drone_device} },
   {id=13, name="Gemlik",   infobots={keyid.oltanis},              items={} },
-  {id=14, name="Oltanis",  infobots={keyid.quartu},               items={keyid.PDA,keyid.tesla_claw,keyid.morph_o_ray} },
+  {id=14, name="Oltanis",  infobots={keyid.quartu},               items={keyid.pda,keyid.tesla_claw,keyid.morph_o_ray} },
   {id=15, name="Quartu",   infobots={keyid.kalebo,keyid.fleet},   items={keyid.bolt_grabber} },
   {id=16, name="KaleboIII",infobots={},                           items={keyid.hologuise,keyid.map_o_matic} },
   {id=17, name="Fleet",    infobots={keyid.veldin},               items={keyid.codebot} }
