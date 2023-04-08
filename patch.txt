@@ -1,7 +1,7 @@
 #- name: Randomizer
 #- author: bordplate
 #- href: https://github.com/bordplate/rac1-randomizer
-#- version: 1.1.3
+#- version: 1.2
 #- description: Randomizes what items and infobot coordinates you get
 #- update_url: https://bordplate.no/rac1/randomizer.json
 

@@ -214,11 +214,11 @@ struct Moby {
     // asdf
     char asdf[0x26];
     // The moby's pVars.
-    void* pvars;
+    int* pvars;
     // asdf2
     char asdf2[0x2A];
     // The type of moby it is.
-    unsigned short type;
+    unsigned short oClass;
     // asdf3
     char asdf3[0x58];
 };

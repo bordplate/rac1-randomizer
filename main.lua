@@ -155,7 +155,8 @@ function Randomize(seed)
 
 	-- GraphViz file for debugging purposes. Use something like https://dreampuf.github.io/GraphvizOnline/ to view the graph.
 	file = io.open('randomizer_graph.dot', 'w')
-	filewrite("digraph {\n")
+	filewrite("#Copy the contents in: https://dreampuf.github.io/GraphvizOnline/\n\n")
+	filewrite("digraph {\nbgcolor=black\nnode [shape=rect, color=white, fontcolor=white]\n")
 
 	-- Pool of planets we haven't used, planets with outs we haven't used, and free item slots where we can place item requirements we might need to fill
 	local available_planets = table.deepcopy(planets)
@@ -517,9 +518,9 @@ function Randomize(seed)
 							end
 
 							if item_slot.item.ill_items ~= nil then
-								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#ff0000",label="' .. item_slot.item.location .. '",fontsize=8]\n')
+								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#ff0000",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 							else
-								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#00ff00",label="' .. item_slot.item.location .. '",fontsize=8]\n')
+								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#00ff00",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 							end
 
 							--print(item_slot.item.host_item .. " -> " .. GetItemWithID(requirements_left[1]).has_item)
@@ -563,7 +564,7 @@ function Randomize(seed)
 		--print(available_outs[out_index].infobot.id .. " -> " .. found_planet.id)
 
 		if available_outs[out_index].planet == 0 then
-			filewrite('"Veldin1" -> "' .. found_planet.host_item .. '"[label="Clank",fontsize=8]\n')
+			filewrite('"Veldin1" -> "' .. found_planet.host_item .. '"[color="#ffffff",label="Clank",fontcolor=white,fontsize=8]\n')
 		else
 			local orig_infobot_name = "Veldin2"
 
@@ -571,7 +572,7 @@ function Randomize(seed)
 				orig_infobot_name = planets[available_outs[out_index].infobot.id].host_item  -- Fix special case for Veldin2
 			end
 
-			filewrite('"' .. planets[available_outs[out_index].planet].host_item .. '" -> "' .. found_planet.host_item .. '"[label="' .. orig_infobot_name .. '",fontsize=8]\n')
+			filewrite('"' .. planets[available_outs[out_index].planet].host_item .. '" -> "' .. found_planet.host_item .. '"[color="#ffffff",label="' .. orig_infobot_name .. '",fontcolor=white,fontsize=8]\n')
 		end
 
 		planet_list[available_outs[out_index].infobot.id] = found_planet.id  -- Replace infobot with next planet we found
@@ -614,9 +615,9 @@ function Randomize(seed)
 		end
 
 		if item_slot.item.ill_items ~= nil then
-			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#ff00ff",label="' .. item_slot.item.location .. '",fontsize=8]\n')
+			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#ff00ff",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 		else
-			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#0000ff",label="' .. item_slot.item.location .. '",fontsize=8]\n')
+			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#5555ff",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 		end
 
 		--print(item_slot.item.host_item .. " -> " .. remaining_items[1].host_item)
