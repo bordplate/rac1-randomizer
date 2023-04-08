@@ -53,7 +53,7 @@ infobots = {
   {id=0x0A, req_items={} },                                 -- Batalia -> Orxon
   {id=0x0B, req_items={} },                                 -- Orxon -> Pokitaru
   {id=0x0C, req_items={{keyid.o2_mask,keyid.swingshot,keyid.magneboots,keyid.thruster_pack}} },            -- Orxon -> Hoven
-  {id=0x0D, req_items={} },                                 -- Hoven -> Gemlik
+  {id=0x0D, req_items={{keyid.devastator}, {keyid.visibomb}, {keyid.blaster}} },                                 -- Hoven -> Gemlik
   {id=0x0E, req_items={{keyid.swingshot,keyid.magneboots,keyid.trespasser,keyid.devastator}, {keyid.swingshot, keyid.magneboots,keyid.trespasser, keyid.visibomb}} },         -- Gemlik -> Oltanis
   {id=0x0F, req_items={{keyid.grindboots}} },                           -- Oltanis -> Quartu
   {id=0x10, req_items={{keyid.swingshot}} },                           -- Quartu -> KaleboIII
