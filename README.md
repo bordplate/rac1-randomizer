@@ -1,6 +1,6 @@
 # Ratchet & Clank 1 Randomizer
 
-## [Download](https://github.com/bordplate/rac1-randomizer/releases/download/v1.1.2/randomizer.zip)
+## [Download](https://github.com/bordplate/rac1-randomizer/releases/download/v1.2/randomizer.zip)
 
 ## [Discord community](https://discord.gg/EuQKGes33C)
 
