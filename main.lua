@@ -3,10 +3,10 @@ require 'io'
 require 'crc32'
 require 'logicChosen'
 
-function GetItem(name)
+function GetItem(host_item)
 	for i, item in ipairs(items) do
-		if name == item[name] then
-			return item
+		if host_item == item[host_item] then
+			return host_item
 		end
 	end
 end
@@ -318,7 +318,7 @@ function Randomize(seed)
 
 
 		-- Try to fill available item slots to meet requirements for another out, starting with first available out
-		--filewrite("# Filling available outs for " .. found_planet.name .. "\n")
+		--filewrite("# Filling available outs for " .. found_planet.host_item .. "\n")
 		for i, out in pairs(available_outs) do
 			--filewrite("# Available out: " .. out .. "\n")
 			-- Try to fill the requirement in previous planets first
@@ -415,7 +415,7 @@ function Randomize(seed)
 								if value == requirements_left[1] then
 									requirements_left[#requirements_left + 1] = requirements_left[1]
 									table.remove(requirements_left, 1)
-									filewrite("# Encountered illegal item to replace " .. item_slot.item.name .. "\n")
+									filewrite("# Encountered illegal item to replace " .. item_slot.item.host_item .. "\n")
 									goto continue_requirement_search
 								end
 							end
@@ -445,7 +445,7 @@ function Randomize(seed)
 							n_requirements_met = 0
 							for kk, requirement in pairs(reqs) do
 								if requirement == requirements_left[1] then
-									--print(item_slot.item.name .. " can not be replaced with " .. GetItemWithID(requirements_left[1]).name)
+									--print(item_slot.item.location .. " can not be replaced with " .. GetItemWithID(requirements_left[1]).host_item)
 									can_meet = false
 									n_requirements_met = 0
 								end
@@ -453,22 +453,22 @@ function Randomize(seed)
 								can_meet = false
 								for jj, available_item in pairs(item_list) do
 									if requirement == available_item then
-										--print(item_slot.item.name .. " met a requirement for " .. GetItemWithID(requirements_left[1]).name .. ", even though it is a requirement in a different combination")
+										--print(item_slot.item.host_item .. " met a requirement for " .. GetItemWithID(requirements_left[1]).location .. ", even though it is a requirement in a different combination")
 										can_meet = true
-										--filewrite("# " .. GetItemWithID(requirements_left[1]).name .. " met requirement for " .. GetItemWithID(requirement).name .. "\n")
+										--filewrite("# " .. GetItemWithID(requirements_left[1]).host_item .. " met requirement for " .. GetItemWithID(requirement).location .. "\n")
 										--n_requirements_met = n_requirements_met + 1
 									end
 								end
 
 								if can_meet or has_item then
-									filewrite("# " .. GetItemWithID(requirements_left[1]).name .. " met requirement for " .. GetItemWithID(requirement).name .. "\n")
+									filewrite("# " .. GetItemWithID(requirements_left[1]).host_item .. " met requirement for " .. GetItemWithID(requirement).location .. "\n")
 
 									n_requirements_met = n_requirements_met + 1
 								end
 							end
 
 							if n_requirements_met >= #requirements then
-								filewrite("# " .. GetItemWithID(requirements_left[1]).name .. " n_requirements_met: " .. n_requirements_met .. ", #requirements: " .. #requirements .. "\n")
+								filewrite("# " .. GetItemWithID(requirements_left[1]).host_item .. " n_requirements_met: " .. n_requirements_met .. ", #requirements: " .. #requirements .. "\n")
 								can_meet = true
 								goto continue_item_assignment
 							end
@@ -481,7 +481,7 @@ function Randomize(seed)
 						::continue_item_assignment::
 
 						if not can_meet then  -- Can't meet requirements yet, put this requirement at end of list
-							--print("Can't meet requirements for " .. GetItemWithID(requirements_left[1]).name .. ", bumping to end of list. Available slots left: " .. #available_item_slots)
+							--print("Can't meet requirements for " .. GetItemWithID(requirements_left[1]).host_item .. ", bumping to end of list. Available slots left: " .. #available_item_slots)
 
 							local req = table.deepcopy(requirements_left[1])
 							table.remove(requirements_left, 1)
@@ -518,12 +518,12 @@ function Randomize(seed)
 							end
 
 							if item_slot.item.ill_items ~= nil then
-								filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. GetItemWithID(requirements_left[1]).name .. '\"[color="#ff0000",label="' .. item_slot.item.name .. '",fontcolor=white,fontsize=8]\n')
+								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#ff0000",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 							else
-								filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. GetItemWithID(requirements_left[1]).name .. '\"[color="#00ff00",label="' .. item_slot.item.name .. '",fontcolor=white,fontsize=8]\n')
+								filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. GetItemWithID(requirements_left[1]).host_item .. '\"[color="#00ff00",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 							end
 
-							--print(item_slot.item.name .. " -> " .. GetItemWithID(requirements_left[1]).name)
+							--print(item_slot.item.host_item .. " -> " .. GetItemWithID(requirements_left[1]).has_item)
 							item_list[item_slot.item.id] = requirements_left[1]
 
 							RemoveItem(remaining_items, requirements_left[1])
@@ -564,15 +564,15 @@ function Randomize(seed)
 		--print(available_outs[out_index].infobot.id .. " -> " .. found_planet.id)
 
 		if available_outs[out_index].planet == 0 then
-			filewrite('"Veldin1" -> "' .. found_planet.name .. '"[color="#ffffff",label="Novalis",fontcolor=white,fontsize=8]\n')
+			filewrite('"Veldin1" -> "' .. found_planet.host_item .. '"[color="#ffffff",label="Clank",fontcolor=white,fontsize=8]\n')
 		else
 			local orig_infobot_name = "Veldin2"
 
 			if available_outs[out_index].infobot.id < 18 then
-				orig_infobot_name = planets[available_outs[out_index].infobot.id].name  -- Fix special case for Veldin2
+				orig_infobot_name = planets[available_outs[out_index].infobot.id].host_item  -- Fix special case for Veldin2
 			end
 
-			filewrite('"' .. planets[available_outs[out_index].planet].name .. '" -> "' .. found_planet.name .. '"[color="#ffffff",label="' .. orig_infobot_name .. '",fontcolor=white,fontsize=8]\n')
+			filewrite('"' .. planets[available_outs[out_index].planet].host_item .. '" -> "' .. found_planet.host_item .. '"[color="#ffffff",label="' .. orig_infobot_name .. '",fontcolor=white,fontsize=8]\n')
 		end
 
 		planet_list[available_outs[out_index].infobot.id] = found_planet.id  -- Replace infobot with next planet we found
@@ -582,8 +582,8 @@ function Randomize(seed)
 		-- Add Veldin2 to list of available planets if we've placed all other planets.
 		-- This doesn't necessarily make the longest path, but it's good enough for me.
 		if #available_planets <= 0 and #available_outs > 0 then
-			available_planets[1] = {id=18,name="Veldin2",  infobots={}, items={}}
-			planets[18] = {id=18,name="Veldin2",  infobots={}, items={}}
+			available_planets[1] = {id=18,location="Battle through the ships",host_item="Veldin2",  infobots={}, items={}}
+			planets[18] = {id=18,host_item="Veldin2",  infobots={}, items={}}
 		end
 
 		if #available_planets <= 0 then
@@ -615,12 +615,12 @@ function Randomize(seed)
 		end
 
 		if item_slot.item.ill_items ~= nil then
-			filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. remaining_items[1].name .. '\"[color="#ff00ff",label="' .. item_slot.item.name .. '",fontcolor=white,fontsize=8]\n')
+			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#ff00ff",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 		else
-			filewrite('"' .. planets[item_slot.planet].name .. '" -> "' .. remaining_items[1].name .. '\"[color="#5555ff",label="' .. item_slot.item.name .. '",fontcolor=white,fontsize=8]\n')
+			filewrite('"' .. planets[item_slot.planet].host_item .. '" -> "' .. remaining_items[1].host_item .. '\"[color="#5555ff",label="' .. item_slot.item.location .. '",fontcolor=white,fontsize=8]\n')
 		end
 
-		--print(item_slot.item.name .. " -> " .. remaining_items[1].name)
+		--print(item_slot.item.host_item .. " -> " .. remaining_items[1].host_item)
 
 
 		item_list[item_slot.item.id] = remaining_items[1].id
