@@ -1,5 +1,11 @@
 # Ratchet & Clank 1 Randomizer
 
+# Deprecated 
+This version of the randomizer has been superceded by an improved version that works with both console and emulator and uses Archipelago. Please use the new randomizer instead of this one. 
+
+[For information about the Archipelago Randomizer click here.](https://boltcrate.space)
+
+
 ## [Download](https://github.com/bordplate/rac1-randomizer/releases/download/v1.2/randomizer.zip)
 
 ## [Discord community](https://discord.gg/EuQKGes33C)
